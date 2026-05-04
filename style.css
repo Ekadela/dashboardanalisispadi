@@ -376,7 +376,36 @@ padding:0 15px 20px 15px;
 padding:20px 15px;
 }
 }
-  
+
+/* ------- PETA ---------- */
+.custom-legend-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px 10px 5px 10px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    margin-top: 5px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    color: #555;
+    font-weight: 600;
+}
+
+.legend-color {
+    width: 20px;
+    height: 12px;
+    border-radius: 2px;
+    margin-right: 5px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
 /* ------ INSIGHT ------- */
 /* Container Utama */
 .insight-v2 {
