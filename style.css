@@ -34,9 +34,15 @@ background:#f5f7fb;
 }
 
 .header-center h1 {
-    font-size: 24px;
+    font-size: clamp(14px, 4vw, 22px); /* Sedikit lebih besar karena sekarang punya 2 baris */
     margin: 0;
-    letter-spacing: 1px;
+    font-weight: bold;
+    line-height: 1.2;
+    /* Membatasi maksimal 2 baris, selebihnya baru pakai titik-titik (...) */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .header-right {
