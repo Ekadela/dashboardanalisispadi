@@ -9,85 +9,81 @@ background:#f5f7fb;
 /* --- HEADER MAKE OVER --- */
 .header {
     display: flex;
-    justify-content: space-between; /* Membagi ke kiri, tengah, kanan */
+    flex-direction: row !important; /* Paksa tetap horizontal di semua layar */
+    justify-content: space-between;
     align-items: center;
-    background-color: #1a3353; /* Warna biru khas BPS */
+    background-color: #1a3353;
     color: white;
-    padding: 15px 40px;
-    min-height: 80px;
+    padding: 10px 20px; /* Padding diperkecil agar lebih ramping */
+    gap: 10px;
+    min-height: 70px;
 }
 
-/* SISI KIRI: Nama Instansi */
+/* SISI KIRI: Font satu jenis, miring, dua baris */
 .header-left {
     display: flex;
     align-items: center;
-    gap: 15px;
-    flex: 1; /* Memberi ruang seimbang */
+    gap: 8px;
+    flex: 1;
 }
 
 .logo {
-    height: 50px;
+    height: 40px; /* Logo diperkecil sedikit */
     width: auto;
 }
 
-.logo-text h2 {
-    font-size: 18px;
-    margin: 0;
-    font-weight: 800;
-    letter-spacing: 1px;
-    line-height: 1.1;
-}
-
 .logo-text p {
-    font-size: 14px;
+    font-size: 11px; /* Ukuran dikecilkan */
     margin: 0;
-    font-style: italic; /* Sesuai request: Nama provinsi miring */
-    font-weight: 500;
+    font-style: italic; /* Semuanya miring */
+    line-height: 1.2;
+    font-weight: 600;
+    white-space: nowrap; /* Mencegah teks kepotong sembarangan */
 }
 
-/* SISI TENGAH: Judul Dashboard */
+/* SISI TENGAH: Judul */
 .header-center {
-    flex: 2; /* Area judul lebih luas agar bisa di tengah */
+    flex: 1.5;
     text-align: center;
 }
 
 .header-center h1 {
-    font-size: 22px;
+    font-size: 14px; /* Kecilkan font agar muat di mode portrait HP */
     margin: 0;
     font-weight: 700;
     line-height: 1.2;
     text-transform: uppercase;
 }
 
-/* SISI KANAN: Tanggal (Kecil & 2 Baris) */
+/* SISI KANAN: Tanggal kecil */
 .header-right {
     flex: 1;
-    display: flex;
-    flex-direction: column; /* Membuat jadi 2 baris */
-    align-items: flex-end; /* Melekat ke kanan */
     text-align: right;
+    display: flex;
+    flex-direction: column;
 }
 
 .header-right span {
-    font-size: 10px; /* Ukuran kecil */
+    font-size: 9px;
     opacity: 0.8;
 }
 
 .header-right b {
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 10px;
 }
 
-/* RESPONSIVE: Supaya tidak berantakan di layar kecil */
-@media (max-width: 768px) {
+/* FIX: Hapus atau timpa aturan media query yang lama */
+@media (max-width: 1024px) {
     .header {
-        padding: 10px 20px;
+        flex-direction: row !important; /* Mencegah jadi vertikal */
+        padding: 10px;
     }
-    .header-center h1 {
-        font-size: 18px;
-    }
-    .logo-text h2 {
-        font-size: 14px;
+    
+    /* Jika di HP layar sangat kecil, kecilkan lagi teksnya */
+    @media (max-width: 480px) {
+        .header-center h1 { font-size: 12px; }
+        .logo-text p { font-size: 9px; }
+        .logo { height: 30px; }
     }
 }
 
