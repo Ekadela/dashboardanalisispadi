@@ -143,28 +143,31 @@ let produksi = Number(cols[1])
 produksiData[kab] = produksi
 })
 
-function getColor(d){
-return d > 800000 ? "#08306b" :
-d > 600000 ? "#2171b5" :
-d > 400000 ? "#6baed6" :
-d > 200000 ? "#9ecae1" :
-"#c6dbef"
+function getColor(d) {
+    // Skala warna Navy (BPS Style) - Semakin gelap semakin tinggi
+    return d > 900000 ? '#08306b' : // Deep Navy
+           d > 700000 ? '#08519c' :
+           d > 500000 ? '#2171b5' :
+           d > 300000 ? '#4292c6' :
+           d > 100000 ? '#6baed6' :
+           d > 50000  ? '#9ecae1' :
+           d > 10000  ? '#c6dbef' :
+                        '#f7fbff'; // Sangat rendah / Terang
+}
+    
+function style(feature) {
+    let nama = feature.properties.NAME_2;
+    let produksi = produksiData[nama] || 0;
+
+    return {
+        fillColor: getColor(produksi),
+        weight: 1.5,           // Ketebalan garis pembatas
+        opacity: 1,
+        color: 'white',        // Garis pembatas putih biar kek matrix
+        fillOpacity: 0.85      // Lebih pekat biar warnanya "keluar"
+    };
 }
 
-function style(feature){
-
-let nama = feature.properties.NAME_2
-
-let produksi = produksiData[nama] || 0
-
-return{
-fillColor:getColor(produksi),
-weight:1,
-opacity:1,
-color:'navy',
-fillOpacity:0.5
-}
-}
 
 function onEachFeature(feature,layer){
 
@@ -182,6 +185,35 @@ L.geoJson(geoData,{
 style:style,
 onEachFeature:onEachFeature
 }).addTo(map)
+
+// --- TAMBAHAN LEGENDA PETA ---
+const legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+    const div = L.DomUtil.create('div', 'info legend');
+    const grades = [0, 10000, 50000, 100000, 300000, 500000, 700000, 900000];
+    const labels = ['<strong>Tingkat Produksi</strong>'];
+
+    div.style.background = 'white';
+    div.style.padding = '10px';
+    div.style.borderRadius = '5px';
+    div.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)';
+    div.style.fontSize = '10px';
+    div.style.lineHeight = '18px';
+    div.style.color = '#555';
+
+    for (let i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            labels.push(
+                '<i style="background:' + getColor(grades[i] + 1) + '; width: 14px; height: 14px; float: left; margin-right: 8px; opacity: 0.8"></i> ' +
+                (grades[i] ? grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;' + grades[i + 1].toLocaleString() + ' t' : '+ t') : 'Rendah')
+            );
+    }
+    div.innerHTML = labels.join('<br>');
+    return div;
+};
+
+legend.addTo(map);
 
 }
 
