@@ -292,9 +292,17 @@ padding:20px 15px;
     background: #f0fdf4; /* Hijau pucat khas BPS */
     border-radius: 15px;
     pading: 20px;
-    margin-top: 25px;
+    /* Gunakan margin auto dan batasi lebar maksimalnya */
+    margin: 25px 40px; /* Atas-Bawah 25px, Kiri-Kanan 40px */
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Khusus untuk tampilan HP agar marginnya tidak terlalu lebar */
+@media (max-width: 768px) {
+    .insight-v2 {
+        margin: 20px 15px; /* Margin lebih kecil di HP */
+    }
 }
 
 /* Header Hijau Tua */
