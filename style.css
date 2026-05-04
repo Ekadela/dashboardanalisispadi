@@ -6,7 +6,6 @@ background:#f5f7fb;
 
 
 /* HEADER */
-/* --- HEADER MAKE OVER --- */
 /* --- HEADER REFINEMENT --- */
 .header {
     display: flex;
@@ -36,11 +35,11 @@ background:#f5f7fb;
 }
 
 .logo-text p {
-    font-size: 8px; /* Ukuran pas agar miringnya tetap terbaca */
+    font-size: 3px; /* Ukuran pas agar miringnya tetap terbaca */
     margin: 0;
-    font-style: italic;
     line-height: 1.1;
     font-weight: 500;
+    font-style: italic;
     color: rgba(255, 255, 255, 0.9);
 }
 
@@ -63,7 +62,7 @@ background:#f5f7fb;
 /* SISI KANAN: Tanggal (Pojok Kanan Atas) */
 .header-right {
     position: absolute; /* Melayang bebas */
-    top: 10px;          /* Melekat ke atas */
+    top: 3px;          /* Melekat ke atas */
     right: 15px;        /* Melekat ke kanan */
     text-align: right;
     display: flex;
@@ -71,7 +70,7 @@ background:#f5f7fb;
 }
 
 .header-right span {
-    font-size: 7px; /* Sangat kecil agar elegan */
+    font-size: 9px; /* Sangat kecil agar elegan */
     opacity: 0.7;
     text-transform: lowercase;
 }
