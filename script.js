@@ -428,65 +428,63 @@ perubahan+" %"
 
 }
 
-async function generateInsight(){
+async function generateInsight() {
+    // Ambil data 2025
+    let resp25 = await fetch("data/2025.csv");
+    let text25 = await resp25.text();
+    let rows25 = Papa.parse(text25, {header:true}).data;
 
-let data2025 = await fetch("data/2025.csv")
-let text2025 = await data2025.text()
+    let total25 = 0;
+    let maxKab = "";
+    let maxVal = 0;
 
-let rows2025 = text2025.split("\n").slice(1)
+    rows25.forEach(r => {
+        let prod = Number(r.Produksi);
+        if(!isNaN(prod)) {
+            total25 += prod;
+            if(prod > maxVal) {
+                maxVal = prod;
+                maxKab = r.Kabupaten;
+            }
+        }
+    });
 
-let total = 0
-let maxKab = ""
-let max = 0
+    // Ambil data 2024 untuk growth
+    let resp24 = await fetch("data/2024.csv");
+    let text24 = await resp24.text();
+    let rows24 = Papa.parse(text24, {header:true}).data;
+    let total24 = rows24.reduce((s, r) => s + (Number(r.Produksi) || 0), 0);
 
-rows2025.forEach(r=>{
+    let growth = ((total25 - total24) / total24 * 100).toFixed(2);
+    let jutaTon = (total25 / 1000000).toFixed(2);
 
-let cols = r.split(",")
+    // Susun template Insight
+    const insights = [
+        {
+            icon: "📈",
+            text: `Produksi padi Jawa Timur 2025 mencapai <b>${jutaTon} juta ton</b>, meningkat <b>${growth}%</b> dibanding tahun 2024.`
+        },
+        {
+            icon: "📍",
+            text: `<b>${maxKab}</b> kontributor tertinggi dengan total produksi sebesar <b>${maxVal.toLocaleString()} ton</b>.`
+        },
+        {
+            icon: "📅",
+            text: `Luas panen menunjukkan pola musiman dengan puncak pada <b>Maret-April</b> sebagai periode panen utama.`
+        },
+        {
+            icon: "📊",
+            text: `Secara tren, produksi padi relatif <b>stabil</b> dan menunjukkan pemulihan signifikan sejak tahun 2022.`
+        }
+    ];
 
-let kab = cols[0]
-let produksi = Number(cols[1])
-
-if(!isNaN(produksi)){
-
-total += produksi
-
-if(produksi > max){
-max = produksi
-maxKab = kab
-}
-
-}
-
-})
-
-// ambil data 2024 buat growth
-let data2024 = await fetch("data/2024.csv")
-let text2024 = await data2024.text()
-
-let rows2024 = text2024.split("\n").slice(1)
-
-let total2024 = 0
-
-rows2024.forEach(r=>{
-let cols = r.split(",")
-let produksi = Number(cols[1])
-
-if(!isNaN(produksi)){
-total2024 += produksi
-}
-})
-
-let growth = ((total - total2024)/total2024*100).toFixed(2)
-
-// inject ke HTML
-document.getElementById("insightBox").innerHTML = `
-<ul>
-<li>Produksi padi tahun 2025 mencapai <b>${total.toLocaleString()} ton</b>, meningkat <b>${growth}%</b> dibanding 2024.</li>
-<li>Kabupaten dengan produksi tertinggi adalah <b>${maxKab}</b> (${max.toLocaleString()} ton).</li>
-<li>Produksi padi Jawa Timur menunjukkan tren stabil dalam beberapa tahun terakhir.</li>
-</ul>
-`
-
+    // Inject ke HTML
+    document.getElementById("insightBox").innerHTML = insights.map(item => `
+        <div class="insight-item">
+            <div class="insight-icon">${item.icon}</div>
+            <p class="insight-text">${item.text}</p>
+        </div>
+    `).join('');
 }
 
 loadKPI()
