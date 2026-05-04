@@ -488,7 +488,7 @@ async function generateInsight() {
             },
             {
                 icon: "🏘️",
-                text: `Terdapat variasi pertumbuhan yang signifikan antar wilayah; beberapa kabupaten menunjukkan lonjakan produksi di atas <b>10%</b> pada tahun ini.`
+                text: `Terdapat variasi pertumbuhan yang signifikan antar wilayah. Beberapa kabupaten menunjukkan lonjakan produksi di atas <b>10%</b> pada tahun ini.`
             }
         ];
 
