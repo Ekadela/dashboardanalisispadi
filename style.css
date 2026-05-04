@@ -83,18 +83,38 @@ background:#f5f7fb;
 }
 
 .card {
+    position: relative; /* Penting untuk posisi watermark */
     flex: 1;
     background: white;
-    border-radius: 15px; /* Lebih membulat agar modern */
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Shadow lebih lembut */
+    border-radius: 15px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     border: 1px solid #edf2f7;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Agar watermark tidak keluar kotak */
     display: flex;
     align-items: center;
     gap: 20px;
+    z-index: 1;
 }
 
+/* Membuat Watermark (Ikon besar di background) */
+.card::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    width: 100px;
+    height: 100px;
+    background-image: inherit; /* Akan mengambil image dari elemen parent jika diatur */
+    opacity: 0.05; /* Sangat transparan */
+    transform: rotate(-15deg);
+    z-index: -1;
+}
+
+/* Mengatur spesifik warna dan aksen bawah untuk tiap kotak */
+.card:nth-child(1) { border-bottom: 4px solid #2c7be5; } /* Total */
+.card:nth-child(2) { border-bottom: 4px solid #f59e0b; } /* Tertinggi */
+.card:nth-child(3) { border-bottom: 4px solid #10b981; } /* Perubahan */
 /* Efek saat mouse lewat (Hover) */
 .card:hover {
     transform: translateY(-5px);
@@ -108,19 +128,29 @@ background:#f5f7fb;
 }
 
 .card-right h3 {
-    font-size: 14px;
-    color: #64748b; /* Warna teks label lebih soft */
+    font-size: 13px;
+    color: #64748b;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
 }
 
 .card-right h2 {
-    font-size: 22px;
-    color: #1e3a8a; /* Biru gelap profesional */
-    margin: 5px 0 0 0;
+    font-size: 26px; /* Ukuran angka diperbesar agar mantap */
+    color: #1a3353;
+    margin: 5px 0;
     font-weight: 800;
 }
+
+/* Tambahkan sub-teks kecil di bawah angka agar tidak sepi */
+.card-right p {
+    margin: 0;
+    font-size: 12px;
+    color: #94a3b8;
+    font-style: italic;
+}
+
 
 /* GRID */
 
