@@ -1,125 +1,199 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Potret Produksi Padi Jawa Timur 2025</title>
-    
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard Analisis Produksi Padi</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 </head>
+
 <body>
 
-    <header class="main-header">
-        <div class="header-content">
-            <img src="assets/logo.png" class="logo-bps">
-            <div class="title-container">
-                <h1>POTRET LUAS PANEN DAN <br>PRODUKSI PADI JAWA TIMUR 2025</h1>
-                <span class="badge-title">Data Statistik Pertanian Berbasis Kabupaten/Kota</span>
-            </div>
-        </div>
-    </header>
+<!-- HEADER -->
+<div class="header">
 
-    <section class="kpi-container">
-        <div class="kpi-card gold-border">
-            <div class="kpi-icon"><img src="assets/padi.png"></div>
-            <div class="kpi-data">
-                <h4>LUAS PANEN PADI (HA)</h4>
-                <div class="kpi-comparison">
-                    <p>2024: <span id="luas2024">0</span></p>
-                    <p>2025: <b id="luas2025">0</b></p>
-                </div>
-                <div class="kpi-growth plus">
-                    <span id="growthLuas">0%</span> <small>Naik dibanding 2024</small>
-                </div>
-            </div>
-        </div>
+<div class="header-left">
+<img src="assets/logo.png" class="logo">
+<div>
+<h2>BADAN PUSAT STATISTIK</h2>
+<p>PROVINSI JAWA TIMUR</p>
+</div>
+</div>
 
-        <div class="kpi-card green-border">
-            <div class="kpi-icon"><img src="assets/karung.png"></div>
-            <div class="kpi-data">
-                <h4>PRODUKSI PADI (TON)</h4>
-                <div class="kpi-comparison">
-                    <p>2024: <span id="prod2024">0</span></p>
-                    <p>2025: <b id="prod2025">0</b></p>
-                </div>
-                <div class="kpi-growth plus">
-                    <span id="growthProd">0%</span> <small>Naik dibanding 2024</small>
-                </div>
-            </div>
-        </div>
+<div class="header-center">
+<h1>DASHBOARD ANALISIS PRODUKSI PADIIIIIIIII</h1>
+<p>Jawa Timur</p>
+</div>
 
-        <div class="kpi-card dark-green-border">
-            <div class="kpi-icon"><img src="assets/traktor.png"></div>
-            <div class="kpi-data">
-                <h4>PRODUKTIVITAS (TON/HA)</h4>
-                <div class="kpi-comparison">
-                    <p>2024: <span id="yield2024">0</span></p>
-                    <p>2025: <b id="yield2025">0</b></p>
-                </div>
-                <div class="kpi-growth minus">
-                    <span id="growthYield">0%</span> <small>Turun dibanding 2024</small>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="header-right">
+Terakhir diperbarui<br>
+<b>21 April 2026</b>
+</div>
 
-    <main class="dashboard-grid">
-        
-        <div class="panel">
-            <div class="panel-header orange">
-                <h3>TREN PRODUKSI PADI JAWA TIMUR (TON)</h3>
-            </div>
-            <div class="chart-container">
-                <canvas id="trendChart"></canvas>
-            </div>
-        </div>
+</div>
 
-        <div class="panel">
-            <div class="panel-header green">
-                <h3>PERSEBARAN PRODUKSI PER KABUPATEN 2025</h3>
-            </div>
-            <div id="map"></div>
-        </div>
+<!-- KPI CARDS -->
+<div class="cards">
 
-        <div class="panel">
-            <div class="panel-header dark">
-                <h3>TOP 5 KABUPATEN PRODUKSI TERTINGGI</h3>
-            </div>
-            <div class="chart-container">
-                <canvas id="top5Chart"></canvas>
-            </div>
-        </div>
+<div class="card">
 
-        <div class="panel">
-            <div class="panel-header gold">
-                <h3>EKSPLORASI DATA PER KABUPATEN</h3>
-            </div>
-            <div class="control-box">
-                <select id="kabSelect"></select>
-                <div class="kab-stats">
-                    <p>Produksi: <b id="kabProdText">-</b></p>
-                    <p>Tren: <span id="kabGrowthText">-</span></p>
-                </div>
-            </div>
-            <div class="chart-container-small">
-                <canvas id="kabTrendChart"></canvas>
-            </div>
-        </div>
+<div class="card-left">
+<img src="assets/padi.png">
+</div>
 
-    </main>
+<div class="card-right">
+<h4>TOTAL PRODUKSI 2025</h4>
+<h2 id="totalProduksi">-</h2>
+<p>seluruh kabupaten/kota</p>
+</div>
 
-    <footer class="insight-section">
-        <div class="insight-title">
-            <h3>INSIGHT UTAMA PRODUKSI PADI 2025</h3>
-        </div>
-        <div class="insight-grid" id="insightBox">
-            </div>
-    </footer>
+</div>
 
-    <script src="script.js"></script>
+
+<div class="card">
+
+<div class="card-left">
+<img src="assets/kota.png">
+</div>
+
+<div class="card-right">
+<h4>KABUPATEN PRODUKSI TERTINGGI</h4>
+<h2 id="kabTertinggi">-</h2>
+<p id="kabProduksi">-</p>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-left">
+<img src="assets/perubahan.png">
+</div>
+
+<div class="card-right">
+<h4>PERUBAHAN DARI 2024</h4>
+<h2 id="persenPerubahanTotal">-</h2>
+<p>dibanding tahun sebelumnya</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- ROW 1 -->
+<div class="grid">
+
+<div class="panel">
+<h3>TREN PRODUKSI PADI JAWA TIMUR</h3>
+<canvas id="trendChart"></canvas>
+</div>
+
+<div class="panel">
+<h3>PETA PRODUKSI PADI JAWA TIMUR 2025</h3>
+<div id="map"></div>
+</div>
+
+</div>
+
+
+<!-- ROW 2 -->
+<div class="grid">
+
+<div class="panel">
+<h3>TOP 10 KABUPATEN PRODUKSI PADI</h3>
+
+<canvas id="barChart"></canvas>
+<div id="stats2025" style="margin-top:20px;">
+    <h3>Statistik Produksi 2025</h3>
+    <p><b>Total Produksi:</b> <span id="totalProd">-</span></p>
+    <p><b>Produksi Tertinggi:</b> <span id="maxProd">-</span></p>
+    <p><b>Produksi Terendah:</b> <span id="minProd">-</span></p>
+    <p><b>Rata-rata Produksi:</b> <span id="avgProd">-</span></p>
+    </div>
+</div>
+
+
+<div class="panel">
+<h3>TREN PRODUKSI PER KABUPATEN</h3>
+
+<select id="kabupatenSelect"></select>
+
+<div class="kab-info">
+<p id="produksiTerakhir"></p>
+<p id="persenPerubahan"></p>
+</div>
+
+<canvas id="kabChart"></canvas>
+</div>
+
+<div class="insight-container">
+  <h3>Insight Utama</h3>
+  <div id="insightBox"></div>
+</div>
+    
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+<script src="script.js"></script>
+
+<div class="footer">
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<img src="assets/logo.png" class="footer-logo">
+
+<p>BPS Provinsi Jawa Timur</p>
+<p>Jl. Raya Kendangsari Industri No.43 Surabaya</p>
+<p>Telp: (031) 8439343</p>
+<p>Email: bps3500@bps.go.id</p>
+
+</div>
+
+
+<div class="footer-mid">
+
+<h4>Tentang Kami</h4>
+
+<p>Profil BPS</p>
+<p>PPID</p>
+<p>Kebijakan</p>
+<p>Diseminasi</p>
+
+</div>
+
+
+<div class="footer-mid">
+
+<h4>Tautan Lainnya</h4>
+
+<p>ASEAN Stats</p>
+<p>Reformasi Birokrasi</p>
+<p>Layanan Pengadaan</p>
+<p>STIS</p>
+
+</div>
+
+</div>
+
+
+<div class="footer-bottom">
+Hak Cipta © 2026 Badan Pusat Statistik
+</div>
+
+</div>
+
 </body>
 </html>
