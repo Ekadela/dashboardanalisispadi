@@ -33,10 +33,10 @@ background:#f5f7fb;
 }
 
 .logo-text p {
-    font-size: 11px; /* Ukuran dikecilkan */
+    font-size: 7px; /* Ukuran dikecilkan */
     margin: 0;
     font-style: italic; /* Semuanya miring */
-    line-height: 1.2;
+    line-height: 1.1;
     font-weight: 600;
     white-space: nowrap; /* Mencegah teks kepotong sembarangan */
 }
@@ -48,7 +48,7 @@ background:#f5f7fb;
 }
 
 .header-center h1 {
-    font-size: 14px; /* Kecilkan font agar muat di mode portrait HP */
+    font-size: 18px; /* Kecilkan font agar muat di mode portrait HP */
     margin: 0;
     font-weight: 700;
     line-height: 1.2;
