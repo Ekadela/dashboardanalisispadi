@@ -1,65 +1,498 @@
-// Konfigurasi Warna
-const COLORS = {
-    padi: '#f8b400',
-    green: '#016a41',
-    dark: '#0d3b2e'
-};
+async function loadData(){
 
-async function initDashboard() {
-    // 1. Ambil Data
-    const data2025 = await fetchCSV('data/2025.csv');
-    const data2024 = await fetchCSV('data/2024.csv');
-    const years = [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
-    
-    // 2. Update KPI
-    updateKPI(data2025, data2024);
-    
-    // 3. Render Charts
-    renderTrendChart(years); // Perlu fetching semua tahun
-    renderTop5(data2025);
-    renderMap(data2025);
-    initKabupatenExplorer(years);
-    renderInsights(data2025, data2024);
+const years = [2018,2019,2020,2021,2022,2023,2024,2025]
+
+let totalProduksi = []
+let labels = []
+
+for(let year of years){
+
+let response = await fetch(`data/${year}.csv`)
+let text = await response.text()
+
+let rows = text.split("\n").slice(1)
+
+let total = 0
+
+rows.forEach(r=>{
+let cols = r.split(",")
+
+let produksi = Number(cols[1])
+
+if(!isNaN(produksi)){
+total += produksi
+}
+})
+
+labels.push(year)
+totalProduksi.push(total)
+
 }
 
-async function fetchCSV(path) {
-    const response = await fetch(path);
-    const text = await response.text();
-    return Papa.parse(text, { header: true, skipEmptyLines: true }).data;
+drawChart(labels,totalProduksi)
+
 }
 
-function updateKPI(d25, d24) {
-    const sum = (data, key) => data.reduce((a, b) => a + Number(b[key] || 0), 0);
-    
-    const prod25 = sum(d25, 'Produksi');
-    const prod24 = sum(d24, 'Produksi');
-    const growth = ((prod25 - prod24) / prod24 * 100).toFixed(2);
-    
-    document.getElementById('prod2025').innerText = prod25.toLocaleString() + " Ton";
-    document.getElementById('prod2024').innerText = prod24.toLocaleString();
-    document.getElementById('growthProd').innerText = growth + "%";
+function drawChart(labels,data){
+
+const ctx = document.getElementById("trendChart")
+
+new Chart(ctx,{
+type:'line',
+data:{
+labels:labels,
+datasets:[{
+label:'Produksi Padi Jawa Timur',
+data:data,
+borderColor:'#2c7be5',
+backgroundColor:'rgba(44,123,229,0.2)',
+tension:0.3
+}]
+}
+})
+
 }
 
-function renderTop5(data) {
-    const sorted = [...data].sort((a, b) => b.Produksi - a.Produksi).slice(0, 5);
-    new Chart(document.getElementById('top5Chart'), {
-        type: 'bar',
-        data: {
-            labels: sorted.map(d => d.Kabupaten),
-            datasets: [{
-                label: 'Produksi (Ton)',
-                data: sorted.map(d => d.Produksi),
-                backgroundColor: COLORS.green,
-                borderRadius: 10
-            }]
-        },
-        options: { 
-            indexAxis: 'y', // Bar horizontal seperti infografis
-            maintainAspectRatio: false 
-        }
-    });
+// 
+
+async function hitungStatistik(){
+
+let response = await fetch("data/2025.csv")
+let text = await response.text()
+
+let rows = text.split("\n").slice(1)
+
+let total = 0
+let count = 0
+let maxKab = ""
+let max = 0
+let minKab = ""
+let min = Infinity
+
+rows.forEach(r=>{
+
+let cols = r.split(",")
+
+let kab = cols[0]
+let produksi = Number(cols[1])
+
+if(!isNaN(produksi)){
+
+total += produksi
+count++
+
+if(produksi > max){
+max = produksi
+maxKab = kab
 }
 
-// ... Tambahkan fungsi renderMap, renderTrendChart dsb ...
-// Pastikan memanggil initDashboard() di akhir file
-initDashboard();
+if(produksi < min){
+min = produksi
+minKab = kab
+}
+
+}
+
+})
+
+let avg = total / count
+
+document.getElementById("totalProd").innerText =
+total.toLocaleString()+" ton"
+
+document.getElementById("maxProd").innerText =
+maxKab+" ("+max.toLocaleString()+" ton)"
+
+document.getElementById("minProd").innerText =
+minKab+" ("+min.toLocaleString()+" ton)"
+
+document.getElementById("avgProd").innerText =
+avg.toLocaleString(undefined,{maximumFractionDigits:0})+" ton"
+
+}
+
+// NAMPILIN PETA
+
+async function loadMap(){
+
+const map = L.map('map').setView([-7.5,112],8)
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'© OpenStreetMap'
+}).addTo(map)
+
+let geo = await fetch("map/jatim.geojson")
+let geoData = await geo.json()
+
+let csv = await fetch("data/2025.csv")
+let text = await csv.text()
+
+let rows = text.split("\n").slice(1)
+
+let produksiData = {}
+
+rows.forEach(r=>{
+let cols = r.split(",")
+
+let kab = cols[0]
+.replace("Kabupaten ","")
+.replace("Kota ", "Kota ")
+.trim()
+let produksi = Number(cols[1])
+
+produksiData[kab] = produksi
+})
+
+function getColor(d){
+return d > 800000 ? "#08306b" :
+d > 600000 ? "#2171b5" :
+d > 400000 ? "#6baed6" :
+d > 200000 ? "#9ecae1" :
+"#c6dbef"
+}
+
+function style(feature){
+
+let nama = feature.properties.NAME_2
+
+let produksi = produksiData[nama] || 0
+
+return{
+fillColor:getColor(produksi),
+weight:1,
+opacity:1,
+color:'navy',
+fillOpacity:0.5
+}
+}
+
+function onEachFeature(feature,layer){
+
+let nama = feature.properties.NAME_2
+
+let produksi = produksiData[nama] || 0
+
+layer.bindPopup(
+`<b>${nama}</b><br>Produksi: ${produksi.toLocaleString()} ton`
+)
+
+}
+
+L.geoJson(geoData,{
+style:style,
+onEachFeature:onEachFeature
+}).addTo(map)
+
+}
+
+// NAMPILN TOP 10 KABUPATEN PRODUKSI TERBANYAK
+async function loadTop10(){
+
+let response = await fetch("data/2025.csv")
+let text = await response.text()
+
+let rows = text.split("\n").slice(1)
+
+let data = []
+
+rows.forEach(r=>{
+
+let cols = r.split(",")
+
+let kab = cols[0].trim()
+let produksi = Number(cols[1])
+
+if(!isNaN(produksi)){
+data.push({
+kabupaten:kab,
+produksi:produksi
+})
+}
+
+})
+
+/* urutkan dari terbesar */
+
+data.sort((a,b)=> b.produksi - a.produksi)
+
+/* ambil 10 terbesar */
+
+let top10 = data.slice(0,10)
+
+let labels = top10.map(d=>d.kabupaten)
+let values = top10.map(d=>d.produksi)
+
+drawBarChart(labels,values)
+
+}
+
+function drawBarChart(labels,data){
+
+const ctx = document.getElementById("barChart")
+
+new Chart(ctx,{
+type:'bar',
+data:{
+labels:labels,
+datasets:[{
+label:'Produksi Padi 2025',
+data:data,
+backgroundColor:'#2c7be5'
+}]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{
+display:false,
+maintainAspectRatio: false
+}
+}
+}
+})
+
+}
+
+// NAMPILIN TREN PER KABUPATEN
+async function loadKabupatenTrend(){
+
+const years = [2018,2019,2020,2021,2022,2023,2024,2025]
+
+let dataKab = {}
+
+for(let year of years){
+
+let response = await fetch(`data/${year}.csv`)
+let text = await response.text()
+
+let rows = text.split("\n").slice(1)
+
+rows.forEach(r=>{
+
+let cols = r.split(",")
+
+let kab = cols[0].trim()
+let produksi = Number(cols[1])
+
+if(!dataKab[kab]){
+dataKab[kab] = []
+}
+
+dataKab[kab].push(produksi)
+
+})
+
+}
+
+initDropdown(dataKab,years)
+
+}
+
+function initDropdown(dataKab,years){
+
+const select = document.getElementById("kabupatenSelect")
+
+Object.keys(dataKab).forEach(kab=>{
+
+let option = document.createElement("option")
+option.value = kab
+option.text = kab
+
+select.appendChild(option)
+
+})
+
+select.addEventListener("change",()=>{
+
+updateKabChart(select.value,dataKab,years)
+
+})
+
+updateKabChart(select.value,dataKab,years)
+
+}
+
+let kabChart
+
+function updateKabChart(kab,dataKab,years){
+
+let data = dataKab[kab]
+
+if(kabChart){
+kabChart.destroy()
+}
+
+const ctx = document.getElementById("kabChart")
+
+kabChart = new Chart(ctx,{
+type:'line',
+data:{
+labels:years,
+datasets:[{
+label:kab,
+data:data,
+borderColor:'#f59e0b',
+backgroundColor:'rgba(245,158,11,0.2)',
+tension:0.3
+}]
+}
+})
+
+updateKabInfo(data)
+
+}
+
+// TAMPILAN SUB HEADERNYA
+
+function updateKabInfo(data){
+
+let last = data[data.length-1]
+let prev = data[data.length-2]
+
+let persen = ((last-prev)/prev*100).toFixed(2)
+
+document.getElementById("produksiTerakhir").innerText =
+"Produksi tahun terakhir: "+ last.toLocaleString()+" ton"
+
+document.getElementById("persenPerubahan").innerText =
+"Perubahan dari tahun sebelumnya: "+ persen +" %"
+
+}
+
+async function loadKPI(){
+
+let data2025 = await fetch("data/2025.csv")
+let text2025 = await data2025.text()
+
+let rows2025 = text2025.split("\n").slice(1)
+
+let total2025 = 0
+let maxKab = ""
+let maxProduksi = 0
+
+rows2025.forEach(r=>{
+
+let cols = r.split(",")
+
+let kab = cols[0]
+let produksi = Number(cols[1])
+
+if(!isNaN(produksi)){
+
+total2025 += produksi
+
+if(produksi > maxProduksi){
+maxProduksi = produksi
+maxKab = kab
+}
+
+}
+
+})
+
+
+let data2024 = await fetch("data/2024.csv")
+let text2024 = await data2024.text()
+
+let rows2024 = text2024.split("\n").slice(1)
+
+let total2024 = 0
+
+rows2024.forEach(r=>{
+
+let cols = r.split(",")
+
+let produksi = Number(cols[1])
+
+if(!isNaN(produksi)){
+total2024 += produksi
+}
+
+})
+
+
+let perubahan = ((total2025-total2024)/total2024*100).toFixed(2)
+
+
+document.getElementById("totalProduksi").innerText =
+total2025.toLocaleString()+" ton"
+
+document.getElementById("kabTertinggi").innerText =
+maxKab
+
+document.getElementById("kabProduksi").innerText =
+maxProduksi.toLocaleString()+" ton"
+
+document.getElementById("persenPerubahanTotal").innerText =
+perubahan+" %"
+
+}
+
+async function generateInsight(){
+
+let data2025 = await fetch("data/2025.csv")
+let text2025 = await data2025.text()
+
+let rows2025 = text2025.split("\n").slice(1)
+
+let total = 0
+let maxKab = ""
+let max = 0
+
+rows2025.forEach(r=>{
+
+let cols = r.split(",")
+
+let kab = cols[0]
+let produksi = Number(cols[1])
+
+if(!isNaN(produksi)){
+
+total += produksi
+
+if(produksi > max){
+max = produksi
+maxKab = kab
+}
+
+}
+
+})
+
+// ambil data 2024 buat growth
+let data2024 = await fetch("data/2024.csv")
+let text2024 = await data2024.text()
+
+let rows2024 = text2024.split("\n").slice(1)
+
+let total2024 = 0
+
+rows2024.forEach(r=>{
+let cols = r.split(",")
+let produksi = Number(cols[1])
+
+if(!isNaN(produksi)){
+total2024 += produksi
+}
+})
+
+let growth = ((total - total2024)/total2024*100).toFixed(2)
+
+// inject ke HTML
+document.getElementById("insightBox").innerHTML = `
+<ul>
+<li>Produksi padi tahun 2025 mencapai <b>${total.toLocaleString()} ton</b>, meningkat <b>${growth}%</b> dibanding 2024.</li>
+<li>Kabupaten dengan produksi tertinggi adalah <b>${maxKab}</b> (${max.toLocaleString()} ton).</li>
+<li>Produksi padi Jawa Timur menunjukkan tren stabil dalam beberapa tahun terakhir.</li>
+</ul>
+`
+
+}
+
+loadKPI()
+loadData()
+loadMap()
+loadTop10()
+loadKabupatenTrend()
+hitungStatistik()
+generateInsight()
