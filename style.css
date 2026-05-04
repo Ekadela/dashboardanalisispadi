@@ -249,7 +249,8 @@ padding:0 15px 20px 15px;
 .cards{
 padding:20px 15px;
 }
-
+  
+/* Insight */
 .insight-container{
   background: #f0fdf4;
   border-radius: 12px;
@@ -269,6 +270,4 @@ padding:20px 15px;
 
 .insight-container li{
   margin-bottom: 8px;
-}
-
 }
