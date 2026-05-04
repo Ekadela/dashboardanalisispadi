@@ -286,24 +286,71 @@ padding:20px 15px;
 }
   
 /* Insight */
-.insight-container{
-  grid-column: 1 / -1;
-  background: #f0fdf4;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+/* Container Utama */
+.insight-v2 {
+    grid-column: 1 / -1; /* Biar memanjang dari kiri ke kanan */
+    background: #f0fdf4; /* Hijau pucat khas BPS */
+    border: 2px solid #016a41;
+    border-radius: 15px;
+    margin-top: 25px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.insight-container h3{
-  margin-bottom: 10px;
-  color: #166534;
+/* Header Hijau Tua */
+.insight-header-v2 {
+    background: #016a41;
+    color: white;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-.insight-container ul{
-  padding-left: 20px;
+.insight-header-v2 h3 {
+    margin: 0;
+    font-size: clamp(14px, 2vw, 18px);
+    letter-spacing: 1px;
 }
 
-.insight-container li{
-  margin-bottom: 8px;
+/* Grid untuk Isinya */
+.insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 25px;
+}
+
+/* Style Per Item Insight */
+.insight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+/* Lingkaran Ikon */
+.insight-icon {
+    background: #016a41;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 20px;
+}
+
+.insight-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1a2e1a;
+    margin: 0;
+}
+
+.insight-text b {
+    color: #016a41;
+    font-size: 16px;
 }
