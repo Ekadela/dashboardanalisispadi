@@ -6,8 +6,7 @@ background:#f5f7fb;
 
 
 /* HEADER */
-/* --- HEADER REFINEMENT --- */
-/* --- HEADER REFINEMENT --- */
+/* --- HEADER REFINEMENT --- *
 .header {
     font-family: 'Inter', sans-serif; /* Menggunakan font Inter yang bersih */
     display: flex;
@@ -40,9 +39,10 @@ background:#f5f7fb;
     /* Coba pakai 10px lagi, harusnya aman dengan sistem absolute */
     font-size: 7px; 
     margin: 0;
-    font-style: italic;
+    font-style: italic !important;
     line-height: 1.2;
     font-weight: 500;
+    letter-spacing: 0.3px;
     color: rgba(255, 255, 255, 0.9);
 }
 
@@ -53,6 +53,7 @@ background:#f5f7fb;
 }
 
 .header-center h1 {
+    font-family: 'Inter', sans-serif;
     font-size: 20px; /* Judul dibuat tebal dan jelas */
     margin: 0;
     font-weight: 800;
