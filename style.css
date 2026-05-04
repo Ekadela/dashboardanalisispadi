@@ -74,25 +74,53 @@ background:#f5f7fb;
 
 /* CARDS */
 
-.cards{
-display:flex;
-gap:20px;
-padding:25px 40px;
+/* --- PERBAIKAN CARDS KPI (Kotak dengan Foto) --- */
+.cards {
+    display: flex;
+    gap: 20px;
+    padding: 25px 40px;
+    justify-content: center;
 }
 
-.card{
-flex:1;
-background:white;
-border-radius:12px;
-padding:20px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
+.card {
+    flex: 1;
+    background: white;
+    border-radius: 15px; /* Lebih membulat agar modern */
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Shadow lebih lembut */
+    border: 1px solid #edf2f7;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.card h2{
-color:#1f4e79;
-margin:5px 0;
+/* Efek saat mouse lewat (Hover) */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
+.card-left img {
+    width: 55px; /* Sedikit lebih besar agar jelas */
+    height: auto;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1)); /* Biar foto icon ada dimensinya */
+}
+
+.card-right h3 {
+    font-size: 14px;
+    color: #64748b; /* Warna teks label lebih soft */
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-right h2 {
+    font-size: 22px;
+    color: #1e3a8a; /* Biru gelap profesional */
+    margin: 5px 0 0 0;
+    font-weight: 800;
+}
 
 /* GRID */
 
@@ -285,7 +313,7 @@ padding:20px 15px;
 }
 }
   
-/* Insight */
+/* ------ INSIGHT ------- */
 /* Container Utama */
 .insight-v2 {
     grid-column: 1 / -1; /* Biar memanjang dari kiri ke kanan */
