@@ -86,15 +86,16 @@ background:#f5f7fb;
     position: relative; /* Penting untuk posisi watermark */
     flex: 1;
     background: white;
-    border-radius: 15px;
-    padding: 25px 20px;
+    border-radius: 12px;
+    padding: 15px 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     border: 1px solid #edf2f7;
     overflow: hidden; /* Agar watermark tidak keluar kotak */
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     z-index: 1;
+    min-height: 80px;
 }
 
 /* Membuat Watermark (Ikon besar di background) */
@@ -128,7 +129,7 @@ background:#f5f7fb;
 }
 
 .card-right h3 {
-    font-size: 13px;
+    font-size: 12px;
     color: #64748b;
     margin: 0;
     text-transform: uppercase;
@@ -137,10 +138,11 @@ background:#f5f7fb;
 }
 
 .card-right h2 {
-    font-size: 26px; /* Ukuran angka diperbesar agar mantap */
+    font-size: 22px; /* Ukuran angka diperbesar agar mantap */
     color: #1a3353;
-    margin: 5px 0;
+    margin: 2px 0;
     font-weight: 800;
+    line-height: 1.2;
 }
 
 /* Tambahkan sub-teks kecil di bawah angka agar tidak sepi */
