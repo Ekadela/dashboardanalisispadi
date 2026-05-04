@@ -37,7 +37,7 @@ background:#f5f7fb;
 
 .logo-text p {
     /* Coba pakai 10px lagi, harusnya aman dengan sistem absolute */
-    font-size: 10px; 
+    font-size: 7px; 
     margin: 0;
     font-style: italic;
     line-height: 1.2;
@@ -52,7 +52,7 @@ background:#f5f7fb;
 }
 
 .header-center h1 {
-    font-size: 18px; /* Judul dibuat tebal dan jelas */
+    font-size: 20px; /* Judul dibuat tebal dan jelas */
     margin: 0;
     font-weight: 800;
     line-height: 1.2;
@@ -83,7 +83,7 @@ background:#f5f7fb;
 .header-right b {
     font-size: 10px;
     font-weight: 700;
-    color: #ffd966; /* Warna kuning soft supaya tanggalnya terbaca jelas */
+    color: #fafafa;
 }
 
 /* MEDIA QUERY untuk HP Portrait */
