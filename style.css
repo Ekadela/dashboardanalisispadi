@@ -6,69 +6,88 @@ background:#f5f7fb;
 
 
 /* HEADER */
+/* --- HEADER MAKE OVER --- */
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Membagi ke kiri, tengah, kanan */
     align-items: center;
-    background: #1f4e79;
+    background-color: #1a3353; /* Warna biru khas BPS */
     color: white;
-    padding: 20px 40px;
-    gap: 20px;
+    padding: 15px 40px;
+    min-height: 80px;
 }
 
+/* SISI KIRI: Nama Instansi */
 .header-left {
     display: flex;
     align-items: center;
     gap: 15px;
-    flex: 1;
+    flex: 1; /* Memberi ruang seimbang */
 }
 
 .logo {
-    width: 60px;
-    height: auto;
+    height: 50px;
+    width: auto;
 }
 
+.logo-text h2 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+.logo-text p {
+    font-size: 14px;
+    margin: 0;
+    font-style: italic; /* Sesuai request: Nama provinsi miring */
+    font-weight: 500;
+}
+
+/* SISI TENGAH: Judul Dashboard */
 .header-center {
+    flex: 2; /* Area judul lebih luas agar bisa di tengah */
     text-align: center;
-    flex: 2; /* Biar judul punya ruang lebih luas */
 }
 
 .header-center h1 {
-    font-size: 24px;
+    font-size: 22px;
     margin: 0;
-    letter-spacing: 1px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
 }
 
+/* SISI KANAN: Tanggal (Kecil & 2 Baris) */
 .header-right {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-size: 13px;
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* Membuat jadi 2 baris */
+    align-items: flex-end; /* Melekat ke kanan */
     text-align: right;
-    min-width: 150px;
 }
 
-/* FIX UNTUK TABLET & HP (LANDSCAPE/PORTRAIT) */
-@media (max-width: 1024px) {
+.header-right span {
+    font-size: 10px; /* Ukuran kecil */
+    opacity: 0.8;
+}
+
+.header-right b {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* RESPONSIVE: Supaya tidak berantakan di layar kecil */
+@media (max-width: 768px) {
     .header {
-        flex-direction: column; /* Elemen jadi tumpuk atas-bawah */
-        text-align: center;
-        padding: 20px;
+        padding: 10px 20px;
     }
-
-    .header-left {
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
-    .header-right {
-        text-align: center;
-        width: fit-content;
-        margin: 0 auto;
-    }
-
     .header-center h1 {
-        font-size: 20px; /* Mengecilkan judul di layar kecil */
+        font-size: 18px;
+    }
+    .logo-text h2 {
+        font-size: 14px;
     }
 }
 
