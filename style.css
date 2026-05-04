@@ -429,20 +429,6 @@ padding:20px 15px;
     white-space: nowrap;
 }
 
-/* Cari bagian panel tempat trendChart berada */
-#trendChart {
-    height: 400px !important; /* Sesuaikan angka ini agar tingginya sama dengan panel peta di kanan */
-    width: 100% !important;
-}
-
-/* Biar sejajar dengan peta di sebelahnya */
-.panel {
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Memastikan semua panel dalam satu baris punya tinggi sama */
-}
-
-
 /* ------ INSIGHT ------- */
 /* Container Utama */
 .insight-v2 {
