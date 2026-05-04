@@ -431,38 +431,48 @@ perubahan+" %"
 //INSIGHTNYA
 async function generateInsight() {
     try {
-        // 1. Ambil data 2025
+        // 1. Ambil data 2025 (Cara manual seperti loadKPI)
         let resp25 = await fetch("data/2025.csv");
         let text25 = await resp25.text();
-        let rows25 = Papa.parse(text25, {header: true, skipEmptyLines: true}).data;
+        let rows25 = text25.split("\n").slice(1); // Buang baris pertama (header)
 
-        // Hitung total 2025 & cari kabupaten tertinggi
         let total25 = 0;
         let maxKab = "";
         let maxVal = 0;
 
         rows25.forEach(r => {
-            let prod = Number(r.Produksi);
-            if (!isNaN(prod)) {
-                total25 += prod;
-                if (prod > maxVal) {
-                    maxVal = prod;
-                    maxKab = r.Kabupaten;
+            let cols = r.split(",");
+            if (cols.length >= 2) {
+                let kab = cols[0].trim();
+                let prod = Number(cols[1]);
+
+                if (!isNaN(prod)) {
+                    total25 += prod;
+                    if (prod > maxVal) {
+                        maxVal = prod;
+                        maxKab = kab;
+                    }
                 }
             }
         });
 
-        // 2. Ambil data 2024 untuk growth
+        // 2. Ambil data 2024 untuk hitung growth
         let resp24 = await fetch("data/2024.csv");
         let text24 = await resp24.text();
-        let rows24 = Papa.parse(text24, {header: true, skipEmptyLines: true}).data;
-        let total24 = rows24.reduce((s, r) => s + (Number(r.Produksi) || 0), 0);
+        let rows24 = text24.split("\n").slice(1);
+        
+        let total24 = 0;
+        rows24.forEach(r => {
+            let cols = r.split(",");
+            let prod = Number(cols[1]);
+            if (!isNaN(prod)) total24 += prod;
+        });
 
-        // 3. Kalkulasi angka untuk insight
-        let growth = ((total25 - total24) / total24 * 100).toFixed(2);
+        // 3. Kalkulasi (Cegah pembagian dengan nol)
+        let growth = total24 !== 0 ? ((total25 - total24) / total24 * 100).toFixed(2) : "0";
         let jutaTon = (total25 / 1000000).toFixed(2);
 
-        // 4. Susun template Insight (Gunakan variabel yang sudah dihitung di atas)
+        // 4. Template Insight
         const insights = [
             {
                 icon: "📈",
@@ -483,12 +493,15 @@ async function generateInsight() {
         ];
 
         // 5. Inject ke HTML
-        document.getElementById("insightBox").innerHTML = insights.map(item => `
-            <div class="insight-item">
-                <div class="insight-icon">${item.icon}</div>
-                <div class="insight-text">${item.text}</div>
-            </div>
-        `).join('');
+        const insightBox = document.getElementById("insightBox");
+        if (insightBox) {
+            insightBox.innerHTML = insights.map(item => `
+                <div class="insight-item">
+                    <div class="insight-icon">${item.icon}</div>
+                    <div class="insight-text">${item.text}</div>
+                </div>
+            `).join('');
+        }
 
     } catch (error) {
         console.error("Gagal memuat insight:", error);
