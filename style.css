@@ -142,7 +142,7 @@ background:#f5f7fb;
     flex-direction: column;
     justify-content: center; /* Tengah vertikal */
     align-items: center;     /* Tengah horizontal */
-    text-align: center;
+    text-align: top;
     padding-top: 6px;      /* Memberi ruang agar tidak nempel judul */
 }
 
@@ -155,7 +155,7 @@ background:#f5f7fb;
 
 .card-main-content p {
     margin: 4px 0 0 0;
-    font-size: 16px;
+    font-size: 13px;
     color: #64748b;
     font-style: italic;
     font-weight: 500;
