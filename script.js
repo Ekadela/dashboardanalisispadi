@@ -41,13 +41,17 @@ new Chart(ctx,{
 type:'line',
 data:{
 labels:labels,
-datasets:[{
-label:'Produksi Padi Jawa Timur',
-data:data,
-borderColor:'#2c7be5',
-backgroundColor:'rgba(44,123,229,0.2)',
-tension:0.3
+datasets: [{
+    label: 'Produksi Padi Jawa Timur',
+    data: data,
+    borderColor: '#1f4e79',
+    backgroundColor: 'rgba(31, 78, 121, 0.1)', // Warna biru navy transparan
+    fill: true, // Ini yang bikin grafiknya berisi
+    tension: 0.4,
+    pointRadius: 5,
+    pointBackgroundColor: '#1f4e79'
 }]
+
 }
 })
 
