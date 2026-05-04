@@ -186,32 +186,36 @@ style:style,
 onEachFeature:onEachFeature
 }).addTo(map)
 
-// --- LEGENDA MATRIX KONTINU ---
+// --- LEGENDA MATRIX BOUNDARY ---
 const legendContainer = document.getElementById('map-legend');
+// Pastikan jumlah 'grades' ini sama dengan langkah warna di getColor
 const grades = [0, 100000, 300000, 500000, 700000, 900000];
 
-// 1. Tambahkan Judul Keterangan
 legendContainer.innerHTML = '<div class="legend-title">Keterangan:</div>';
 
-// 2. Buat Skala
 const scaleWrapper = document.createElement('div');
 scaleWrapper.className = 'legend-scale';
 
-// Buat Bar Warna (Jejer jadi satu)
+// 1. Buat Bar Warna
 let colorBarHtml = '<div class="color-bar">';
 grades.forEach(g => {
     colorBarHtml += `<div class="color-step" style="background: ${getColor(g + 1)}"></div>`;
 });
 colorBarHtml += '</div>';
 
-// Buat Bar Label (Angka di bawahnya)
+// 2. Buat Bar Label (Angka di Tepi Garis)
 let labelBarHtml = '<div class="label-bar">';
-grades.forEach(g => {
+const stepPercent = 100 / grades.length;
+
+grades.forEach((g, i) => {
     let labelText = g === 0 ? "0" : (g / 1000) + "k";
-    labelBarHtml += `<div class="label-step" style="flex: 1;">${labelText}</div>`;
+    // Posisi kiri adalah (indeks * lebar per kotak)
+    let leftPos = i * stepPercent;
+    labelBarHtml += `<div class="label-step" style="left: ${leftPos}%">${labelText}</div>`;
 });
-// Tambahkan label terakhir untuk nilai plus
-labelBarHtml += `<div class="label-step" style="width: 20px;">+</div>`;
+
+// Tambahkan label terakhir di paling ujung kanan (100%)
+labelBarHtml += `<div class="label-step" style="left: 100%">+</div>`;
 labelBarHtml += '</div>';
 
 scaleWrapper.innerHTML = colorBarHtml + labelBarHtml;
