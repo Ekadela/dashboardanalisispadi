@@ -1,145 +1,273 @@
-:root {
-    --primary-blue: #1f4e79;
-    --gold-padi: #f8b400;
-    --green-dark: #0d3b2e;
-    --green-bright: #016a41;
-    --bg-light: #f4f7f6;
-    --white: #ffffff;
+body{
+font-family: Arial;
+margin:0;
+background:#f5f7fb;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    background: var(--bg-light);
-    color: #333;
-}
 
 /* HEADER */
-.main-header {
-    background: white;
-    padding: 20px 40px;
-    border-bottom: 4px solid var(--green-bright);
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap: wrap;
+background:#1f4e79;
+color:white;
+padding:15px 40px;
 }
 
-.header-content {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.header-left{
+display:flex;
+align-items:center;
+gap:15px;
 }
 
-.logo-bps { height: 60px; }
-
-.title-container h1 {
-    margin: 0;
-    font-size: 22px;
-    color: var(--green-dark);
+.logo{
+width:60px;
 }
 
-.badge-title {
-    background: var(--green-dark);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 12px;
-    font-weight: bold;
+.header-center{
+text-align:center;
 }
 
-/* KPI CARDS */
-.kpi-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 25px 40px;
+.header-right{
+background:#2e6aa1;
+padding:10px 20px;
+border-radius:8px;
 }
 
-.kpi-card {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    border-left: 8px solid #ccc;
+
+/* CARDS */
+
+.cards{
+display:flex;
+gap:20px;
+padding:25px 40px;
 }
 
-.kpi-card.gold-border { border-color: var(--gold-padi); }
-.kpi-card.green-border { border-color: var(--green-bright); }
-.kpi-card.dark-green-border { border-color: var(--green-dark); }
-
-.kpi-icon img { width: 50px; }
-
-.kpi-data h4 { margin: 0; font-size: 13px; color: #666; }
-.kpi-comparison p { margin: 5px 0; font-size: 14px; }
-
-.kpi-growth {
-    font-size: 14px;
-    font-weight: bold;
-    padding: 3px 8px;
-    border-radius: 5px;
-    display: inline-block;
+.card{
+flex:1;
+background:white;
+border-radius:12px;
+padding:20px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
-.kpi-growth.plus { background: #e6f9e8; color: #166534; }
-.kpi-growth.minus { background: #fef2f2; color: #991b1b; }
-
-/* GRID LAYOUT */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-    padding: 0 40px 40px 40px;
+.card h2{
+color:#1f4e79;
+margin:5px 0;
 }
 
-.panel {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+padding:0 40px 25px 40px;
 }
 
-.panel-header {
-    padding: 12px 20px;
-    color: white;
+.panel{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
-.panel-header.orange { background: #df8800; }
-.panel-header.green { background: var(--green-bright); }
-.panel-header.dark { background: var(--green-dark); }
-.panel-header.gold { background: var(--gold-padi); }
-
-.panel-header h3 { margin: 0; font-size: 15px; }
-
-#map { height: 350px; }
-
-.chart-container { padding: 20px; height: 300px; }
-.chart-container-small { padding: 15px; height: 200px; }
-
-/* RESPONSIVE LANDSCAPE FIX */
-@media (max-width: 1100px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr; /* Tumpuk saat layar menyempit */
-    }
+.panel h3{
+margin-top:0;
+color:#1f4e79;
 }
 
-/* INSIGHT SECTION */
-.insight-section {
-    margin: 0 40px 40px 40px;
-    background: white;
-    border-radius: 15px;
-    border: 2px solid var(--green-bright);
+
+/* MAP PLACEHOLDER */
+
+.map-placeholder{
+height:350px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#e3e8f0;
+border-radius:8px;
+color:#555;
 }
 
-.insight-title {
-    background: var(--green-bright);
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
+#map{
+height:350px;
+border-radius:10px;
 }
 
-.insight-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
+#kabupatenSelect{
+padding:8px;
+margin-bottom:10px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+.kab-info{
+font-size:14px;
+margin-bottom:10px;
+color:#444;
+}
+
+.card{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.card-left img{
+width:45px;
+}
+
+.card-right h2{
+margin:5px 0;
+color:#1f4e79;
+}
+
+.footer{
+background:#0b3a75;
+color:white;
+margin-top:40px;
+}
+
+.footer-container{
+display:flex;
+gap:60px;
+padding:40px;
+}
+
+.footer-logo{
+width:70px;
+margin-bottom:10px;
+}
+
+.footer-mid h4{
+margin-bottom:10px;
+}
+
+.footer-bottom{
+border-top:1px solid rgba(255,255,255,0.2);
+padding:15px 40px;
+font-size:14px;
+}
+
+.statistik-box{
+margin-top:20px;
+padding:15px;
+background:#f3f6fb;
+border-radius:8px;
+font-size:14px;
+line-height:1.7;
+}
+
+.statistik-box h4{
+margin-top:0;
+color:#1f4e79;
+font-size:16px;
+}
+
+.statistik-box b{
+color:#333;
+}
+
+#stats2025{
+margin-top:25px;
+padding-top:10px;
+border-top:1px solid #ddd;
+}
+
+#stats2025 h3{
+font-size:18px;
+margin-bottom:10px;
+color:#1f4e79;
+}
+
+#stats2025 p{
+font-size:14px;
+margin:8px 0;
+line-height:1.6;
+}
+
+#barChart{
+height:300px !important;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  canvas {
+    height: 250px !important;
+  }
+}
+
+/* TAMBAHAN RESPONSIVE */
+@media (max-width: 768px){
+
+  .header{
+    padding:15px 20px;
+  }
+
+  .cards{
+    flex-direction:column;
+    padding:20px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+    padding:20px;
+  }
+
+  .footer-container{
+    flex-direction:column;
+    gap:20px;
+    padding:25px;
+  }
+
+}
+
+canvas{
+width:100% !important;
+}
+
+@media (max-width:768px){
+
+.panel{
+padding:15px;
+}
+
+.grid{
+padding:0 15px 20px 15px;
+}
+
+.cards{
+padding:20px 15px;
+}
+  
+/* Insight */
+.insight-container{
+  background: #f0fdf4;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.insight-container h3{
+  margin-bottom: 10px;
+  color: #166534;
+}
+
+.insight-container ul{
+  padding-left: 20px;
+}
+
+.insight-container li{
+  margin-bottom: 8px;
 }
