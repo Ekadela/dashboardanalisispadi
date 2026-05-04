@@ -7,85 +7,88 @@ background:#f5f7fb;
 
 /* HEADER */
 /* --- HEADER MAKE OVER --- */
+/* --- HEADER REFINEMENT --- */
 .header {
     display: flex;
-    flex-direction: row !important; /* Paksa tetap horizontal di semua layar */
-    justify-content: space-between;
+    flex-direction: row !important;
     align-items: center;
+    justify-content: center; /* Paksa judul ke tengah */
     background-color: #1f4e79;
     color: white;
-    padding: 10px 20px; /* Padding diperkecil agar lebih ramping */
-    gap: 10px;
-    min-height: 70px;
+    padding: 10px 15px;
+    min-height: 80px; /* Sedikit lebih tinggi agar lega */
+    position: relative; /* Wajib ada untuk mengatur posisi elemen 'melayang' */
+    overflow: hidden;
 }
 
-/* SISI KIRI: Font satu jenis, miring, dua baris */
+/* SISI KIRI: Melayang di kiri */
 .header-left {
     display: flex;
     align-items: center;
     gap: 8px;
-    flex: 1;
+    position: absolute; /* Melayang bebas */
+    left: 15px;         /* Jarak dari kiri */
 }
 
 .logo {
-    height: 40px; /* Logo diperkecil sedikit */
+    height: 35px; 
     width: auto;
 }
 
 .logo-text p {
-    font-size: 7px; /* Ukuran dikecilkan */
+    font-size: 8px; /* Ukuran pas agar miringnya tetap terbaca */
     margin: 0;
-    font-style: italic; /* Semuanya miring */
+    font-style: italic;
     line-height: 1.1;
-    font-weight: 600;
-    white-space: nowrap; /* Mencegah teks kepotong sembarangan */
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-/* SISI TENGAH: Judul */
+/* SISI TENGAH: Judul (Dibuat Gagah) */
 .header-center {
-    flex: 1.5;
+    max-width: 50%; /* Jangan sampai nabrak sisi kiri/kanan */
     text-align: center;
+    z-index: 1;
 }
 
 .header-center h1 {
-    font-size: 18px; /* Kecilkan font agar muat di mode portrait HP */
+    font-size: 16px; /* Lebih besar dari teks instansi */
     margin: 0;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.2;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* SISI KANAN: Tanggal kecil */
+/* SISI KANAN: Tanggal (Pojok Kanan Atas) */
 .header-right {
-    flex: 1;
+    position: absolute; /* Melayang bebas */
+    top: 10px;          /* Melekat ke atas */
+    right: 15px;        /* Melekat ke kanan */
     text-align: right;
     display: flex;
     flex-direction: column;
 }
 
 .header-right span {
-    font-size: 9px;
-    opacity: 0.8;
+    font-size: 7px; /* Sangat kecil agar elegan */
+    opacity: 0.7;
+    text-transform: lowercase;
 }
 
 .header-right b {
-    font-size: 10px;
+    font-size: 9px;
+    font-weight: 600;
 }
 
-/* FIX: Hapus atau timpa aturan media query yang lama */
-@media (max-width: 1024px) {
-    .header {
-        flex-direction: row !important; /* Mencegah jadi vertikal */
-        padding: 10px;
-    }
-    
-    /* Jika di HP layar sangat kecil, kecilkan lagi teksnya */
-    @media (max-width: 480px) {
-        .header-center h1 { font-size: 12px; }
-        .logo-text p { font-size: 9px; }
-        .logo { height: 30px; }
-    }
+/* Responsive: Kecilkan font kalau layar benar-benar sempit */
+@media (max-width: 480px) {
+    .header-center h1 { font-size: 13px; }
+    .logo-text p { font-size: 7px; }
+    .header-left { left: 10px; }
+    .header-right { right: 10px; }
 }
+
 
 /* CARDS */
 
