@@ -51,7 +51,7 @@ function drawChart(labels, data) {
     pointBackgroundColor: '#1f4e79'
 }]
 
-}
+}}}
 
 // 
 
