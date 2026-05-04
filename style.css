@@ -7,87 +7,100 @@ background:#f5f7fb;
 
 /* HEADER */
 /* --- HEADER REFINEMENT --- */
+/* --- HEADER REFINEMENT --- */
 .header {
     display: flex;
     flex-direction: row !important;
     align-items: center;
-    justify-content: center; /* Paksa judul ke tengah */
+    justify-content: center; /* Judul tetap di tengah */
     background-color: #1f4e79;
     color: white;
-    padding: 10px 15px;
-    min-height: 80px; /* Sedikit lebih tinggi agar lega */
-    position: relative; /* Wajib ada untuk mengatur posisi elemen 'melayang' */
+    padding: 10px 20px;
+    min-height: 85px; /* Tinggi ditambah sedikit supaya box di kanan bawah aman */
+    position: relative;
     overflow: hidden;
 }
 
-/* SISI KIRI: Melayang di kiri */
+/* SISI KIRI: Nama Instansi */
 .header-left {
     display: flex;
     align-items: center;
-    gap: 8px;
-    position: absolute; /* Melayang bebas */
-    left: 15px;         /* Jarak dari kiri */
+    gap: 10px;
+    position: absolute;
+    left: 20px;
 }
 
 .logo {
-    height: 35px; 
+    height: 40px; 
     width: auto;
 }
 
 .logo-text p {
-    font-size: 3px; /* Ukuran pas agar miringnya tetap terbaca */
+    /* Coba pakai 10px lagi, harusnya aman dengan sistem absolute */
+    font-size: 10px; 
     margin: 0;
-    line-height: 1.1;
-    font-weight: 500;
     font-style: italic;
+    line-height: 1.2;
+    font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* SISI TENGAH: Judul (Dibuat Gagah) */
+/* SISI TENGAH: Judul Dashboard */
 .header-center {
-    max-width: 50%; /* Jangan sampai nabrak sisi kiri/kanan */
     text-align: center;
     z-index: 1;
 }
 
 .header-center h1 {
-    font-size: 16px; /* Lebih besar dari teks instansi */
+    font-size: 18px; /* Judul dibuat tebal dan jelas */
     margin: 0;
     font-weight: 800;
     line-height: 1.2;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
-/* SISI KANAN: Tanggal (Pojok Kanan Atas) */
+/* SISI KANAN: Tanggal dengan BOX di KANAN BAWAH */
 .header-right {
-    position: absolute; /* Melayang bebas */
-    top: 3px;          /* Melekat ke atas */
-    right: 15px;        /* Melekat ke kanan */
+    position: absolute;
+    bottom: 10px;    /* Kunci di pojok bawah */
+    right: 20px;     /* Kunci di pojok kanan */
+    background: rgba(255, 255, 255, 0.15); /* Box transparan tipis */
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: right;
     display: flex;
     flex-direction: column;
 }
 
 .header-right span {
-    font-size: 9px; /* Sangat kecil agar elegan */
-    opacity: 0.7;
-    text-transform: lowercase;
+    font-size: 8px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .header-right b {
-    font-size: 9px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 700;
+    color: #ffd966; /* Warna kuning soft supaya tanggalnya terbaca jelas */
 }
 
-/* Responsive: Kecilkan font kalau layar benar-benar sempit */
+/* MEDIA QUERY untuk HP Portrait */
 @media (max-width: 480px) {
-    .header-center h1 { font-size: 13px; }
-    .logo-text p { font-size: 7px; }
-    .header-left { left: 10px; }
-    .header-right { right: 10px; }
+    .header {
+        min-height: 90px;
+    }
+    .header-center h1 {
+        font-size: 14px;
+    }
+    .logo-text p {
+        font-size: 8px; /* Di HP kita turunkan sedikit tapi jangan sampai 3px */
+    }
+    .header-right {
+        padding: 3px 8px;
+    }
 }
-
 
 /* CARDS */
 
