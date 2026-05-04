@@ -8,7 +8,6 @@ background:#f5f7fb;
 /* HEADER */
 /* --- HEADER REFINEMENT --- *
 .header {
-    font-family: 'Inter', sans-serif; /* Menggunakan font Inter yang bersih */
     display: flex;
     flex-direction: row !important;
     align-items: center;
@@ -53,7 +52,6 @@ background:#f5f7fb;
 }
 
 .header-center h1 {
-    font-family: 'Inter', sans-serif;
     font-size: 20px; /* Judul dibuat tebal dan jelas */
     margin: 0;
     font-weight: 800;
