@@ -6,8 +6,6 @@ background:#f5f7fb;
 
 
 /* HEADER */
-
-.header {
 .header {
     display: flex;
     justify-content: space-between;
