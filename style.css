@@ -64,7 +64,7 @@ margin:5px 0;
 
 .grid{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
 gap:20px;
 padding:0 40px 25px 40px;
 }
@@ -254,7 +254,7 @@ padding:20px 15px;
 
 /* Insight */
 .insight-container{
-  background: #f0fdf4;
+  background: #f3f6fb;
   border-radius: 12px;
   padding: 20px;
   margin-top: 20px;
