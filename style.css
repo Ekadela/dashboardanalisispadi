@@ -6,67 +6,69 @@ background:#f5f7fb;
 
 
 /* HEADER */
-/* --- HEADER REFINEMENT --- */
+/* --- HEADER PROFESSIONAL BPS STYLE --- */
 .header {
+    font-family: 'Inter', sans-serif; /* Menggunakan font Inter agar 'berisi' */
     display: flex;
     flex-direction: row !important;
     align-items: center;
-    justify-content: center; /* Judul tetap di tengah */
+    justify-content: center; 
     background-color: #1f4e79;
     color: white;
     padding: 10px 20px;
-    min-height: 85px; /* Tinggi ditambah sedikit supaya box di kanan bawah aman */
+    min-height: 85px; 
     position: relative;
     overflow: hidden;
 }
 
-/* SISI KIRI: Nama Instansi */
+/* SISI KIRI: Instansi */
 .header-left {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     position: absolute;
     left: 20px;
 }
 
 .logo {
-    height: 40px; 
+    height: 45px; /* Logo sedikit lebih besar agar gagah */
     width: auto;
 }
 
 .logo-text p {
-    /* Coba pakai 10px lagi, harusnya aman dengan sistem absolute */
-    font-size: 3px; 
+    font-size: 11px; /* Ukuran normal, tidak perlu 3px lagi */
     margin: 0;
-    transform: skewX(-15deg); /* Memiringkan teks secara manual ke arah kanan */
-    letter-spacing:0.3px;
-    line-height: 1.2;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
+    font-style: italic; /* Sekarang pasti miring karena font Inter punya data italic */
+    line-height: 1.3;
+    font-weight: 700; /* Dibuat tebal agar 'berisi' */
+    letter-spacing: 0.2px;
+    color: #ffffff;
+    transform: none; /* Hapus skew manual yang bikin pecah */
 }
 
 /* SISI TENGAH: Judul Dashboard */
 .header-center {
     text-align: center;
-    z-index: 1;
+    max-width: 45%; /* Memberi ruang agar tidak tabrakan dengan kiri/kanan */
 }
 
 .header-center h1 {
-    font-size: 22px; /* Judul dibuat tebal dan jelas */
+    font-size: 18px; /* Ukuran yang pas untuk dashboard profesional */
     margin: 0;
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.1;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* SISI KANAN: Tanggal dengan BOX di KANAN BAWAH */
+/* SISI KANAN: Box Tanggal (Kanan Bawah) */
 .header-right {
     position: absolute;
-    bottom: 10px;    /* Kunci di pojok bawah */
-    right: 20px;     /* Kunci di pojok kanan */
-    background: rgba(255, 255, 255, 0.15); /* Box transparan tipis */
-    padding: 5px 10px;
-    border-radius: 6px;
+    bottom: 12px;    
+    right: 20px;     
+    background: rgba(255, 255, 255, 0.15); 
+    padding: 6px 12px;
+    border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: right;
     display: flex;
@@ -77,29 +79,20 @@ background:#f5f7fb;
     font-size: 8px;
     opacity: 0.9;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-weight: 400;
 }
 
 .header-right b {
     font-size: 10px;
     font-weight: 700;
-    color: #fafafa;
+    color: #ffd966; /* Kuning soft agar kontras di box */
 }
 
-/* MEDIA QUERY untuk HP Portrait */
-@media (max-width: 480px) {
-    .header {
-        min-height: 90px;
-    }
-    .header-center h1 {
-        font-size: 14px;
-    }
-    .logo-text p {
-        font-size: 8px; /* Di HP kita turunkan sedikit tapi jangan sampai 3px */
-    }
-    .header-right {
-        padding: 3px 8px;
-    }
+/* RESPONSIVE PERBAIKAN */
+@media (max-width: 768px) {
+    .header-center h1 { font-size: 14px; }
+    .logo-text p { font-size: 9px; }
+    .logo { height: 35px; }
 }
 
 
