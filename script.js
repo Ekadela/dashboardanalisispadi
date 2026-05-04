@@ -476,19 +476,19 @@ async function generateInsight() {
         const insights = [
             {
                 icon: "📈",
-                text: `Produksi padi Jawa Timur 2025 mencapai <b>${jutaTon} juta ton</b>, meningkat <b>${growth}%</b> dibanding tahun 2024.`
+                text: `Total produksi padi Jawa Timur tahun 2025 mencapai <b>${jutaTon} juta ton</b>. Angka ini menunjukkan pertumbuhan sebesar <b>${growth}%</b> dibandingkan tahun sebelumnya.`
             },
             {
-                icon: "📍",
-                text: `<b>${maxKab}</b> kontributor tertinggi dengan total produksi sebesar <b>${maxVal.toLocaleString()} ton</b>.`
-            },
-            {
-                icon: "📅",
-                text: `Luas panen menunjukkan pola musiman dengan puncak pada <b>Maret-April</b> sebagai periode panen utama.`
+                icon: "🏆",
+                text: `<b>${maxKab}</b> mengukuhkan posisi sebagai lumbung padi utama di Jawa Timur dengan kontribusi sebesar <b>${maxVal.toLocaleString()} ton</b>.`
             },
             {
                 icon: "📊",
-                text: `Secara tren, produksi padi relatif <b>stabil</b> dan menunjukkan pemulihan signifikan sejak tahun 2022.`
+                text: `Secara umum, tren produksi tahunan di tingkat provinsi menunjukkan fase <b>pemulihan yang positif</b> setelah sempat fluktuatif di periode 2022-2024.`
+            },
+            {
+                icon: "🏘️",
+                text: `Terdapat variasi pertumbuhan yang signifikan antar wilayah; beberapa kabupaten menunjukkan lonjakan produksi di atas <b>10%</b> pada tahun ini.`
             }
         ];
 
