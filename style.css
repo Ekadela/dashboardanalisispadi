@@ -12,79 +12,65 @@ background:#f5f7fb;
     align-items: center;
     background: #1f4e79;
     color: white;
-    padding: 10px 20px; /* Padding lebih kecil agar hemat ruang */
-    gap: 10px;
-    height: 70px; /* Kunci tinggi agar tetap ramping */
-    overflow: hidden;
-    white-space: nowrap; /* Paksa semua teks tetap sebaris */
+    padding: 20px 40px;
+    gap: 20px;
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 8px;
-    flex-shrink: 0; /* Logo tidak boleh mengecil */
+    gap: 15px;
+    flex: 1;
 }
 
 .logo {
-    width: clamp(30px, 5vw, 50px); /* Ukuran logo dinamis */
-}
-
-.logo-text h2 {
-    font-size: clamp(10px, 2vw, 16px);
-    margin: 0;
-}
-
-.logo-text p {
-    font-size: clamp(8px, 1.5vw, 12px);
-    margin: 0;
-    opacity: 0.8;
+    width: 60px;
+    height: auto;
 }
 
 .header-center {
-    flex-grow: 1;
     text-align: center;
-    padding: 0 5px;
+    flex: 2; /* Biar judul punya ruang lebih luas */
 }
 
 .header-center h1 {
-    /* Font akan mengecil otomatis: minimal 12px, maksimal 24px */
-    font-size: clamp(12px, 3vw, 24px); 
+    font-size: 24px;
     margin: 0;
-    font-weight: bold;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Kalau tetap gak muat, bakal jadi ... */
+    letter-spacing: 1px;
 }
 
 .header-right {
-    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 13px;
     text-align: right;
-    line-height: 1.2;
+    min-width: 150px;
 }
 
-.header-right span {
-    display: block; /* Paksa jadi 2 baris */
-    font-size: clamp(8px, 1.2vw, 11px);
-    opacity: 0.9;
-}
-
-.header-right b {
-    font-size: clamp(9px, 1.4vw, 13px);
-    white-space: nowrap;
-}
-
-/* Responsif Khusus HP Layar Sangat Kecil */
-@media (max-width: 480px) {
+/* FIX UNTUK TABLET & HP (LANDSCAPE/PORTRAIT) */
+@media (max-width: 1024px) {
     .header {
-        padding: 5px 10px;
+        flex-direction: column; /* Elemen jadi tumpuk atas-bawah */
+        text-align: center;
+        padding: 20px;
     }
-    .logo-text {
-        display: none; /* Sembunyikan teks BPS di HP kecil agar judul lebih luas */
+
+    .header-left {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .header-right {
+        text-align: center;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    .header-center h1 {
+        font-size: 20px; /* Mengecilkan judul di layar kecil */
     }
 }
-
-
-
 
 /* CARDS */
 
