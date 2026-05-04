@@ -143,7 +143,7 @@ background:#f5f7fb;
     justify-content: center; /* Tengah vertikal */
     align-items: center;     /* Tengah horizontal */
     text-align: center;
-    padding-top: 5px;      /* Memberi ruang agar tidak nempel judul */
+    padding-top: 10px;      /* Memberi ruang agar tidak nempel judul */
 }
 
 .card-main-content h2 {
