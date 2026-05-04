@@ -35,7 +35,7 @@ background:#f5f7fb;
     width: auto;
 }
 
-.logo-text p {
+.logo-text {
     font-size: 3px; /* Ukuran normal, tidak perlu 3px lagi */
     margin: 0;
     font-style: italic !important; /* Sekarang pasti miring karena font Inter punya data italic */
