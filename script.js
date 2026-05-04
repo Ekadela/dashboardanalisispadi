@@ -37,46 +37,20 @@ function drawChart(labels, data) {
     const ctx = document.getElementById("trendChart");
 
     new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Produksi Padi Jawa Timur',
-                data: data,
-                borderColor: '#1f4e79',
-                backgroundColor: 'rgba(31, 78, 121, 0.1)', // Efek area agar "berisi"
-                fill: true, 
-                tension: 0.4,
-                pointRadius: 4,
-                borderWidth: 3
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false, // Wajib: agar grafik narik ke bawah sesuai tinggi div
-            layout: {
-                padding: {
-                    bottom: 0 // Menghilangkan space kosong di bawah sumbu X
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top',
-                    labels: { font: { size: 11, family: 'Inter' } }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: false, // Biar grafiknya lebih dinamis fluktuasinya
-                    grid: { color: 'rgba(0,0,0,0.05)' }
-                },
-                x: {
-                    grid: { display: false } // Hilangkan garis vertikal agar bersih
-                }
-            }
-        }
-    });
+    type: 'line',
+    data: {
+    labels: labels,
+    datasets: [{
+    label: 'Produksi Padi Jawa Timur',
+    data: data,
+    borderColor: '#1f4e79',
+    backgroundColor: 'rgba(31, 78, 121, 0.1)', // Warna biru navy transparan
+    fill: true, // Ini yang bikin grafiknya berisi
+    tension: 0.4,
+    pointRadius: 5,
+    pointBackgroundColor: '#1f4e79'
+}]
+
 }
 
 // 
