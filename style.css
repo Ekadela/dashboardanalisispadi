@@ -91,7 +91,7 @@ background:#f5f7fb;
 /* RESPONSIVE PERBAIKAN */
 @media (max-width: 768px) {
     .header-center h1 { font-size: 14px; }
-    .logo-text p { font-size: 9px; }
+    .logo-text { font-size: 6px; }
     .logo { height: 35px; }
 }
 
