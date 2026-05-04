@@ -428,9 +428,71 @@ perubahan+" %"
 
 }
 
+async function generateInsight(){
+
+let data2025 = await fetch("data/2025.csv")
+let text2025 = await data2025.text()
+
+let rows2025 = text2025.split("\n").slice(1)
+
+let total = 0
+let maxKab = ""
+let max = 0
+
+rows2025.forEach(r=>{
+
+let cols = r.split(",")
+
+let kab = cols[0]
+let produksi = Number(cols[1])
+
+if(!isNaN(produksi)){
+
+total += produksi
+
+if(produksi > max){
+max = produksi
+maxKab = kab
+}
+
+}
+
+})
+
+// ambil data 2024 buat growth
+let data2024 = await fetch("data/2024.csv")
+let text2024 = await data2024.text()
+
+let rows2024 = text2024.split("\n").slice(1)
+
+let total2024 = 0
+
+rows2024.forEach(r=>{
+let cols = r.split(",")
+let produksi = Number(cols[1])
+
+if(!isNaN(produksi)){
+total2024 += produksi
+}
+})
+
+let growth = ((total - total2024)/total2024*100).toFixed(2)
+
+// inject ke HTML
+document.getElementById("insightBox").innerHTML = `
+<ul>
+<li>Produksi padi tahun 2025 mencapai <b>${total.toLocaleString()} ton</b>, meningkat <b>${growth}%</b> dibanding 2024.</li>
+<li>Kabupaten dengan produksi tertinggi adalah <b>${maxKab}</b> (${max.toLocaleString()} ton).</li>
+<li>Produksi padi Jawa Timur menunjukkan tren stabil dalam beberapa tahun terakhir.</li>
+</ul>
+`
+
+}
+
 loadKPI()
 loadData()
 loadMap()
 loadTop10()
 loadKabupatenTrend()
 hitungStatistik()
+generateInsight()
