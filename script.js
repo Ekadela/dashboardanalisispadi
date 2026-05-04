@@ -186,34 +186,31 @@ style:style,
 onEachFeature:onEachFeature
 }).addTo(map)
 
-// --- TAMBAHAN LEGENDA PETA ---
-const legend = L.control({position: 'bottomright'});
+// --- LEGENDA HORIZONTAL DI LUAR PETA ---
+const legendContainer = document.getElementById('map-legend');
+const grades = [0, 100000, 300000, 500000, 700000, 900000];
 
-legend.onAdd = function (map) {
-    const div = L.DomUtil.create('div', 'info legend');
-    const grades = [0, 10000, 50000, 100000, 300000, 500000, 700000, 900000];
-    const labels = ['<strong>Tingkat Produksi</strong>'];
+// Bersihkan container dulu kalau ada isinya
+legendContainer.innerHTML = '';
 
-    div.style.background = 'white';
-    div.style.padding = '10px';
-    div.style.borderRadius = '5px';
-    div.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)';
-    div.style.fontSize = '10px';
-    div.style.lineHeight = '18px';
-    div.style.color = '#555';
+grades.forEach((grade, index) => {
+    const nextGrade = grades[index + 1];
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    
+    // Label teks (Misal: 100rb - 300rb)
+    let labelText = nextGrade 
+        ? (grade / 1000) + 'k - ' + (nextGrade / 1000) + 'k'
+        : (grade / 1000) + 'k+';
+    
+    if (grade === 0) labelText = "< 100k";
 
-    for (let i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            labels.push(
-                '<i style="background:' + getColor(grades[i] + 1) + '; width: 14px; height: 14px; float: left; margin-right: 8px; opacity: 0.8"></i> ' +
-                (grades[i] ? grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;' + grades[i + 1].toLocaleString() + ' t' : '+ t') : 'Rendah')
-            );
-    }
-    div.innerHTML = labels.join('<br>');
-    return div;
-};
-
-legend.addTo(map);
+    item.innerHTML = `
+        <div class="legend-color" style="background: ${getColor(grade + 1)}"></div>
+        <span>${labelText}</span>
+    `;
+    legendContainer.appendChild(item);
+});
 
 }
 
