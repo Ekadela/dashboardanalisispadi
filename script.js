@@ -33,14 +33,15 @@ drawChart(labels,totalProduksi)
 
 }
 
-function drawChart(labels, data) {
-    const ctx = document.getElementById("trendChart");
+function drawChart(labels,data){
 
-    new Chart(ctx, {
-    type: 'line',
-    data: {
-    labels: labels,
-    datasets: [{
+const ctx = document.getElementById("trendChart")
+
+new Chart(ctx,{
+type:'line',
+data:{
+labels:labels,
+datasets: [{
     label: 'Produksi Padi Jawa Timur',
     data: data,
     borderColor: '#1f4e79',
@@ -51,8 +52,9 @@ function drawChart(labels, data) {
     pointBackgroundColor: '#1f4e79'
 }]
 
-}}}
-
+}
+})
+}
 // 
 
 async function hitungStatistik(){
