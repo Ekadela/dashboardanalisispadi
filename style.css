@@ -74,7 +74,7 @@ background:#f5f7fb;
 
 /* CARDS */
 
-/* --- PERBAIKAN CARDS KPI (Kotak dengan Foto) --- */
+/* --- PERBAIKAN CARDS KPI (Struktur Satu Garis & Angka Tengah) --- */
 .cards {
     display: flex;
     gap: 20px;
@@ -83,74 +83,79 @@ background:#f5f7fb;
 }
 
 .card {
-    position: relative; /* Penting untuk posisi watermark */
+    position: relative;
     flex: 1;
     background: white;
     border-radius: 12px;
     padding: 15px 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     border: 1px solid #edf2f7;
-    overflow: hidden; /* Agar watermark tidak keluar kotak */
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    overflow: hidden;
     z-index: 1;
-    min-height: 80px;
+    min-height: 120px; /* Tinggi ditambah sedikit agar angka punya ruang di tengah */
+    
+    /* Ubah ke column agar bisa bagi area atas dan tengah */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Membuat Watermark (Ikon besar di background) */
-.card::after {
-    content: "";
-    position: absolute;
-    right: -10px;
-    bottom: -10px;
-    width: 100px;
-    height: 100px;
-    background-image: inherit; /* Akan mengambil image dari elemen parent jika diatur */
-    opacity: 0.05; /* Sangat transparan */
-    transform: rotate(-15deg);
-    z-index: -1;
-}
+/* Garis warna tetap di bawah sesuai request-mu */
+.card:nth-child(1) { border-bottom: 5px solid #2c7be5; } 
+.card:nth-child(2) { border-bottom: 5px solid #f59e0b; } 
+.card:nth-child(3) { border-bottom: 5px solid #10b981; }
 
-/* Mengatur spesifik warna dan aksen bawah untuk tiap kotak */
-.card:nth-child(1) { border-bottom: 4px solid #2c7be5; } /* Total */
-.card:nth-child(2) { border-bottom: 4px solid #f59e0b; } /* Tertinggi */
-.card:nth-child(3) { border-bottom: 4px solid #10b981; } /* Perubahan */
-/* Efek saat mouse lewat (Hover) */
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
-.card-left img {
-    width: 55px; /* Sedikit lebih besar agar jelas */
-    height: auto;
-    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1)); /* Biar foto icon ada dimensinya */
+/* Area Judul (Ikon & Teks Satu Garis) */
+.card-top {
+    display: flex;
+    align-items: center; /* Jajar satu garis secara horizontal */
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-.card-right h3 {
-    font-size: 12px;
+.card-top img {
+    width: 30px; /* Perkecil sedikit agar proporsional dengan judul */
+    height: auto;
+    filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.1));
+}
+
+.card-top h3 {
+    font-size: 11px;
     color: #64748b;
     margin: 0;
     text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.8px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* Mencegah judul turun ke bawah */
 }
 
-.card-right h2 {
-    font-size: 22px; /* Ukuran angka diperbesar agar mantap */
+/* Area Isi (Angka di Tengah) */
+.card-main {
+    flex-grow: 1; /* Mengambil sisa ruang */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Tengah secara vertikal */
+    align-items: center;     /* Tengah secara horizontal */
+    text-align: center;
+}
+
+.card-main h2 {
+    font-size: 24px;
     color: #1a3353;
-    margin: 2px 0;
+    margin: 0;
     font-weight: 800;
-    line-height: 1.2;
 }
 
-/* Tambahkan sub-teks kecil di bawah angka agar tidak sepi */
-.card-right p {
-    margin: 0;
-    font-size: 12px;
+.card-main p {
+    margin: 2px 0 0 0;
+    font-size: 11px;
     color: #94a3b8;
-    font-style: italic;
+    font-style: normal; /* Balikin ke normal biar rapi */
 }
 
 
