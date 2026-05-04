@@ -291,6 +291,7 @@ padding:20px 15px;
     grid-column: 1 / -1; /* Biar memanjang dari kiri ke kanan */
     background: #f0fdf4; /* Hijau pucat khas BPS */
     border-radius: 15px;
+    pading: 20px;
     margin-top: 25px;
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
