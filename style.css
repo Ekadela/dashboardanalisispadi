@@ -290,11 +290,10 @@ padding:20px 15px;
 .insight-v2 {
     grid-column: 1 / -1; /* Biar memanjang dari kiri ke kanan */
     background: #f0fdf4; /* Hijau pucat khas BPS */
-    border: 2px solid #016a41;
     border-radius: 15px;
     margin-top: 25px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 /* Header Hijau Tua */
