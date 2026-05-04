@@ -8,70 +8,83 @@ background:#f5f7fb;
 /* HEADER */
 
 .header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: #1f4e79;
     color: white;
-    padding: 20px 40px;
-    gap: 20px;
+    padding: 10px 20px; /* Padding lebih kecil agar hemat ruang */
+    gap: 10px;
+    height: 70px; /* Kunci tinggi agar tetap ramping */
+    overflow: hidden;
+    white-space: nowrap; /* Paksa semua teks tetap sebaris */
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 15px;
-    flex: 1;
+    gap: 8px;
+    flex-shrink: 0; /* Logo tidak boleh mengecil */
 }
 
 .logo {
-    width: 60px;
-    height: auto;
+    width: clamp(30px, 5vw, 50px); /* Ukuran logo dinamis */
+}
+
+.logo-text h2 {
+    font-size: clamp(10px, 2vw, 16px);
+    margin: 0;
+}
+
+.logo-text p {
+    font-size: clamp(8px, 1.5vw, 12px);
+    margin: 0;
+    opacity: 0.8;
 }
 
 .header-center {
+    flex-grow: 1;
     text-align: center;
-    flex: 2; /* Biar judul punya ruang lebih luas */
+    padding: 0 5px;
 }
 
 .header-center h1 {
-    font-size: 24px;
+    /* Font akan mengecil otomatis: minimal 12px, maksimal 24px */
+    font-size: clamp(12px, 3vw, 24px); 
     margin: 0;
-    letter-spacing: 1px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Kalau tetap gak muat, bakal jadi ... */
 }
 
 .header-right {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-size: 13px;
+    flex-shrink: 0;
     text-align: right;
-    min-width: 150px;
+    line-height: 1.2;
 }
 
-/* FIX UNTUK TABLET & HP (LANDSCAPE/PORTRAIT) */
-@media (max-width: 1024px) {
+.header-right span {
+    display: block; /* Paksa jadi 2 baris */
+    font-size: clamp(8px, 1.2vw, 11px);
+    opacity: 0.9;
+}
+
+.header-right b {
+    font-size: clamp(9px, 1.4vw, 13px);
+    white-space: nowrap;
+}
+
+/* Responsif Khusus HP Layar Sangat Kecil */
+@media (max-width: 480px) {
     .header {
-        flex-direction: column; /* Elemen jadi tumpuk atas-bawah */
-        text-align: center;
-        padding: 20px;
+        padding: 5px 10px;
     }
-
-    .header-left {
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
-    .header-right {
-        text-align: center;
-        width: fit-content;
-        margin: 0 auto;
-    }
-
-    .header-center h1 {
-        font-size: 20px; /* Mengecilkan judul di layar kecil */
+    .logo-text {
+        display: none; /* Sembunyikan teks BPS di HP kecil agar judul lebih luas */
     }
 }
+
 
 
 
