@@ -127,7 +127,7 @@ background:#f5f7fb;
 }
 
 .card-header-v2 h4 {
-    font-size: 18px;
+    font-size: 25px;
     color: #64748b;
     margin: 0;
     text-transform: uppercase;
@@ -143,11 +143,11 @@ background:#f5f7fb;
     justify-content: center; /* Tengah vertikal */
     align-items: center;     /* Tengah horizontal */
     text-align: center;
-    padding-top: 15px;      /* Memberi ruang agar tidak nempel judul */
+    padding-top: 10px;      /* Memberi ruang agar tidak nempel judul */
 }
 
 .card-main-content h2 {
-    font-size: 24px;
+    font-size: 22px;
     color: #1a3353;
     margin: 0;
     font-weight: 800;
