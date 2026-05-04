@@ -154,10 +154,11 @@ background:#f5f7fb;
 }
 
 .card-main-content p {
-    margin: 2px 0 0 0;
-    font-size: 15px;
-    color: #94a3b8;
+    margin: 4px 0 0 0;
+    font-size: 16px;
+    color: #64748b;
     font-style: italic;
+    font-weight: 500;
 }
 
 
