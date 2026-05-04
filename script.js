@@ -186,31 +186,36 @@ style:style,
 onEachFeature:onEachFeature
 }).addTo(map)
 
-// --- LEGENDA HORIZONTAL DI LUAR PETA ---
+// --- LEGENDA MATRIX KONTINU ---
 const legendContainer = document.getElementById('map-legend');
 const grades = [0, 100000, 300000, 500000, 700000, 900000];
 
-// Bersihkan container dulu kalau ada isinya
-legendContainer.innerHTML = '';
+// 1. Tambahkan Judul Keterangan
+legendContainer.innerHTML = '<div class="legend-title">Keterangan:</div>';
 
-grades.forEach((grade, index) => {
-    const nextGrade = grades[index + 1];
-    const item = document.createElement('div');
-    item.className = 'legend-item';
-    
-    // Label teks (Misal: 100rb - 300rb)
-    let labelText = nextGrade 
-        ? (grade / 1000) + 'k - ' + (nextGrade / 1000) + 'k'
-        : (grade / 1000) + 'k+';
-    
-    if (grade === 0) labelText = "< 100k";
+// 2. Buat Skala
+const scaleWrapper = document.createElement('div');
+scaleWrapper.className = 'legend-scale';
 
-    item.innerHTML = `
-        <div class="legend-color" style="background: ${getColor(grade + 1)}"></div>
-        <span>${labelText}</span>
-    `;
-    legendContainer.appendChild(item);
+// Buat Bar Warna (Jejer jadi satu)
+let colorBarHtml = '<div class="color-bar">';
+grades.forEach(g => {
+    colorBarHtml += `<div class="color-step" style="background: ${getColor(g + 1)}"></div>`;
 });
+colorBarHtml += '</div>';
+
+// Buat Bar Label (Angka di bawahnya)
+let labelBarHtml = '<div class="label-bar">';
+grades.forEach(g => {
+    let labelText = g === 0 ? "0" : (g / 1000) + "k";
+    labelBarHtml += `<div class="label-step" style="flex: 1;">${labelText}</div>`;
+});
+// Tambahkan label terakhir untuk nilai plus
+labelBarHtml += `<div class="label-step" style="width: 20px;">+</div>`;
+labelBarHtml += '</div>';
+
+scaleWrapper.innerHTML = colorBarHtml + labelBarHtml;
+legendContainer.appendChild(scaleWrapper);
 
 }
 
