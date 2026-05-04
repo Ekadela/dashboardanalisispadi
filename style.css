@@ -36,9 +36,9 @@ background:#f5f7fb;
 
 .logo-text p {
     /* Coba pakai 10px lagi, harusnya aman dengan sistem absolute */
-    font-size: 5px; 
+    font-size: 3px; 
     margin: 0;
-    font-style: italic ! important;
+    transform: skewX(-15deg); /* Memiringkan teks secara manual ke arah kanan */
     letter-spacing:0.3px;
     line-height: 1.2;
     font-weight: 500;
