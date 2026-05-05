@@ -460,7 +460,7 @@ padding:20px 15px;
     grid-column: 1 / -1; /* Biar memanjang dari kiri ke kanan */
     background: #f1f5f9; /* Hijau pucat khas BPS */
     border-radius: 15px;
-    pading: 20px;
+    pading: 10px;
     /* Gunakan margin auto dan batasi lebar maksimalnya */
     margin: 25px 40px; /* Atas-Bawah 25px, Kiri-Kanan 40px */
     overflow: hidden;
