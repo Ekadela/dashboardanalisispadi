@@ -208,10 +208,19 @@ color:#1f4e79;
 }
 
 /* -- GRAFIK TREN TAHUN --- */
-canvas#trendChart {
-    height: 400px !important; /* Memberikan ruang vertikal yang cukup */
-    width: 100% !important;
+/* Beri tinggi tetap pada container pembungkusnya */
+.panel-chart-container {
+    height: 400px; /* Atur angka ini (misal 400px atau 450px) agar sejajar dengan panel peta */
+    position: relative; /* Wajib agar Chart.js bisa kalkulasi ruang */
+    width: 100%;
 }
+
+/* Pastikan canvas mengisi 100% dari container di atas */
+#trendChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 
 /* MAP PLACEHOLDER */
 
