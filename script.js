@@ -33,28 +33,70 @@ drawChart(labels,totalProduksi)
 
 }
 
-function drawChart(labels,data){
+function drawChart(labels, data) {
+    const ctx = document.getElementById("trendChart");
 
-const ctx = document.getElementById("trendChart")
-
-new Chart(ctx,{
-type:'line',
-data:{
-labels:labels,
-datasets: [{
-    label: 'Produksi Padi Jawa Timur',
-    data: data,
-    borderColor: '#1f4e79',
-    backgroundColor: 'rgba(31, 78, 121, 0.1)', // Warna biru navy transparan
-    fill: true, // Ini yang bikin grafiknya berisi
-    tension: 0.4,
-    pointRadius: 5,
-    pointBackgroundColor: '#1f4e79'
-}]
-
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Produksi Padi',
+                data: data,
+                borderColor: '#10b981', // Hijau BPS
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 6, // Memperbesar titik agar mudah dipencet
+                pointHoverRadius: 8, // Titik membesar saat kursor di atasnya
+                borderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                // SETTING POP-UP (TOOLTIP)
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleFont: { size: 14 },
+                    bodyFont: { size: 14 },
+                    callbacks: {
+                        label: function(context) {
+                            return `Produksi: ${context.parsed.y.toLocaleString()} ton`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true, // MEMULAI SUMBU Y DARI 0
+                    title: {
+                        display: true,
+                        text: 'Jumlah Produksi (Ton)', // NAMA DI ATAS SUMBU Y
+                        font: {
+                            size: 12,
+                            weight: 'bold',
+                            family: 'Inter'
+                        },
+                        color: '#1f4e79'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value.toLocaleString(); // Format ribuan pada angka sumbu Y
+                        }
+                    }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            }
+        }
+    });
 }
-})
-}
+
 // 
 
 async function hitungStatistik(){
