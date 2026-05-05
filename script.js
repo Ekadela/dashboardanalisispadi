@@ -146,15 +146,15 @@ produksiData[kab] = produksi
 })
 
 function getColor(d) {
-    // Skala warna Navy (BPS Style) - Semakin gelap semakin tinggi
-    return d > 900000 ? '#08306b' : // Deep Navy
-           d > 700000 ? '#08519c' :
-           d > 500000 ? '#2171b5' :
-           d > 300000 ? '#4292c6' :
-           d > 100000 ? '#6baed6' :
-           d > 50000  ? '#9ecae1' :
-           d > 10000  ? '#c6dbef' :
-                        '#f7fbff'; // Sangat rendah / Terang
+    // Gradasi Hijau BPS - Dari Hijau Muda ke Hijau Gelap
+    return d > 900000 ? '#065f46' : // Hijau Emerald Sangat Gelap
+           d > 700000 ? '#059669' :
+           d > 500000 ? '#10b981' :
+           d > 300000 ? '#34d399' :
+           d > 100000 ? '#6ee7b7' :
+           d > 50000  ? '#a7f3d0' :
+           d > 10000  ? '#d1fae5' :
+                        '#f0fdf4'; // Hijau sangat pucat
 }
     
 function style(feature) {
@@ -163,13 +163,12 @@ function style(feature) {
 
     return {
         fillColor: getColor(produksi),
-        weight: 1.5,           // Ketebalan garis pembatas
+        weight: 1,              // Ketebalan garis
         opacity: 1,
-        color: 'white',        // Garis pembatas putih biar kek matrix
-        fillOpacity: 0.85      // Lebih pekat biar warnanya "keluar"
+        color: '#333333',       // Garis pembatas Hitam Arang (lebih soft dari hitam pekat)
+        fillOpacity: 0.8
     };
 }
-
 
 function onEachFeature(feature,layer){
 
