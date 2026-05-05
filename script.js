@@ -43,12 +43,12 @@ function drawChart(labels, data) {
             datasets: [{
                 label: 'Produksi Padi',
                 data: data,
-                borderColor: '#10b981', // Hijau BPS
+                borderColor: '#1f4e79', 
                 backgroundColor: 'rgba(16, 185, 129, 0.1)',
                 fill: true,
                 tension: 0.4,
-                pointRadius: 6, // Memperbesar titik agar mudah dipencet
-                pointHoverRadius: 8, // Titik membesar saat kursor di atasnya
+                pointRadius: 3, // Memperbesar titik agar mudah dipencet
+                pointHoverRadius: 5, // Titik membesar saat kursor di atasnya
                 borderWidth: 3
             }]
         },
