@@ -207,6 +207,11 @@ margin-top:0;
 color:#1f4e79;
 }
 
+/* -- GRAFIK TREN TAHUN --- */
+canvas#trendChart {
+    height: 400px !important; /* Memberikan ruang vertikal yang cukup */
+    width: 100% !important;
+}
 
 /* MAP PLACEHOLDER */
 
