@@ -331,7 +331,7 @@ function drawBarChart(labels, data) {
                 y: {
                     ticks: {
                         autoSkip: false,
-                        font: { size: 10 },
+                        font: { size: 17 },
                         // Menambah sedikit padding kiri agar teks dua baris nggak mepet
                         padding: 10 
                     }
