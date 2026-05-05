@@ -308,12 +308,31 @@ backgroundColor:'#2c7be5'
 },
 options:{
 responsive:true,
+maintainAspectRatio:false,
+
+indexAxis:'y',   // INI YANG BIKIN BAR JADI KE SAMPING
+
 plugins:{
 legend:{
-display:false,
-maintainAspectRatio: false
+display:false
+}
+},
+
+scales:{
+x:{
+ticks:{
+callback:function(value){
+return value.toLocaleString()
 }
 }
+},
+y:{
+ticks:{
+autoSkip:false
+}
+}
+}
+
 }
 })
 
