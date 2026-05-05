@@ -335,10 +335,18 @@ margin:8px 0;
 line-height:1.6;
 }
 
-#barChart{
-height:420px !important;
-width:100% !important;
+/* Cari bagian ini di CSS kamu dan ubah angkanya */
+#barChart {
+    /* Jangan 300px, kasih minimal 500px - 600px biar 10 kabupaten bisa napas */
+    height: 550px !important; 
+    width: 100% !important;
 }
+
+/* Kalau kamu pakai pembungkus div, pastikan tingginya juga lega */
+.panel-top-10 { 
+    min-height: 600px; 
+}
+
 
 @media (max-width: 768px) {
   .grid {
