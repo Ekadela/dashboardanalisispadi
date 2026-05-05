@@ -37,19 +37,17 @@ function drawChart(labels, data) {
     const ctx = document.getElementById("trendChart");
 
     new Chart(ctx, {
-        type: 'line',
+        type: 'bar', // Tetap Diagram Batang
         data: {
             labels: labels,
             datasets: [{
-                label: 'Produksi Padi',
+                label: 'Produksi Padi (Ton)',
                 data: data,
-                borderColor: '#1f4e79', 
-                backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                // fill: true,
-                tension: 0.4,
-                pointRadius: 3, // Memperbesar titik agar mudah dipencet
-                pointHoverRadius: 5, // Titik membesar saat kursor di atasnya
-                borderWidth: 3
+                // Menggunakan Kuning BPS
+                backgroundColor: '#f39200', 
+                hoverBackgroundColor: '#c77800',
+                borderRadius: 4,
+                borderWidth: 0
             }]
         },
         options: {
@@ -57,36 +55,23 @@ function drawChart(labels, data) {
             maintainAspectRatio: false,
             plugins: {
                 legend: { display: false },
-                // SETTING POP-UP (TOOLTIP)
                 tooltip: {
-                    enabled: true,
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                    titleFont: { size: 14 },
-                    bodyFont: { size: 14 },
                     callbacks: {
-                        label: function(context) {
-                            return `Produksi: ${context.parsed.y.toLocaleString()} ton`;
-                        }
+                        label: (context) => ` Total: ${context.parsed.y.toLocaleString()} ton`
                     }
                 }
             },
             scales: {
                 y: {
-                    beginAtZero: true, // MEMULAI SUMBU Y DARI 0
+                    beginAtZero: true, // Sumbu Y mulai dari 0
                     title: {
                         display: true,
-                        text: 'Jumlah Produksi (Ton)', // NAMA DI ATAS SUMBU Y
-                        font: {
-                            size: 12,
-                            weight: 'bold',
-                            family: 'Inter'
-                        },
+                        text: 'Jumlah Produksi (Ton)',
+                        font: { weight: 'bold', family: 'Inter' },
                         color: '#1f4e79'
                     },
                     ticks: {
-                        callback: function(value) {
-                            return value.toLocaleString(); // Format ribuan pada angka sumbu Y
-                        }
+                        callback: (value) => value.toLocaleString()
                     }
                 },
                 x: {
