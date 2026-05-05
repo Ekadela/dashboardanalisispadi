@@ -292,51 +292,52 @@ drawBarChart(labels,values)
 
 }
 
-function drawBarChart(labels,data){
 
-const ctx = document.getElementById("barChart")
+function drawBarChart(labels, data) {
+    const ctx = document.getElementById("barChart");
 
-new Chart(ctx,{
-type:'bar',
-data:{
-labels:labels,
-datasets:[{
-label:'Produksi Padi 2025',
-data:data,
-backgroundColor:'#2c7be5'
-}]
-},
-options:{
-responsive:true,
-maintainAspectRatio:false,
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Produksi Padi 2025',
+                data: data,
+                backgroundColor: '#2c7be5',
+                borderRadius: 4,
+                // --- TAMBAHKAN INI ---
+                barPercentage: 0.8,      // Batang mengambil 80% ruang kategori
+                categoryPercentage: 0.9  // Jarak antar kategori lebih rapat
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y', 
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        callback: (v) => v.toLocaleString(),
+                        font: { size: 10 }
+                    }
+                },
+                y: {
+                    ticks: {
+                        autoSkip: false,
+                        font: { 
+                            size: 11, 
+                            weight: '600' // Biar nama kabupaten lebih tegas
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
 
-indexAxis:'y',   // INI YANG BIKIN BAR JADI KE SAMPING
-
-plugins:{
-legend:{
-display:false
-}
-},
-
-scales:{
-x:{
-ticks:{
-callback:function(value){
-return value.toLocaleString()
-}
-}
-},
-y:{
-ticks:{
-autoSkip:false
-}
-}
-}
-
-}
-})
-
-}
 
 // NAMPILIN TREN PER KABUPATEN
 async function loadKabupatenTrend(){
