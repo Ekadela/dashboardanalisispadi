@@ -45,7 +45,7 @@ function drawChart(labels, data) {
                 data: data,
                 borderColor: '#1f4e79', 
                 backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                fill: true,
+                // fill: true,
                 tension: 0.4,
                 pointRadius: 3, // Memperbesar titik agar mudah dipencet
                 pointHoverRadius: 5, // Titik membesar saat kursor di atasnya
