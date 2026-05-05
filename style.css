@@ -336,7 +336,8 @@ line-height:1.6;
 }
 
 #barChart{
-height:300px !important;
+height:420px !important;
+width:100% !important;
 }
 
 @media (max-width: 768px) {
