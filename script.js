@@ -282,13 +282,21 @@ produksi:produksi
 data.sort((a,b)=> b.produksi - a.produksi)
 
 /* ambil 10 terbesar */
+let top10 = data.slice(0, 10);
 
-let top10 = data.slice(0,10)
+// MODIFIKASI DISINI: Pecah string jadi array [Kabupaten/Kota, Nama]
+let labels = top10.map(d => {
+    let nama = d.kabupaten;
+    if (nama.includes("Kabupaten ")) {
+        return ["Kabupaten", nama.replace("Kabupaten ", "")];
+    } else if (nama.includes("Kota ")) {
+        return ["Kota", nama.replace("Kota ", "")];
+    }
+    return nama; // Jaga-jaga kalau formatnya beda
+});
 
-let labels = top10.map(d=>d.kabupaten)
-let values = top10.map(d=>d.produksi)
-
-drawBarChart(labels,values)
+let values = top10.map(d => d.produksi);
+drawBarChart(labels, values);
 
 }
 
@@ -305,9 +313,8 @@ function drawBarChart(labels, data) {
                 data: data,
                 backgroundColor: '#2c7be5',
                 borderRadius: 4,
-                // --- TAMBAHKAN INI ---
-                barPercentage: 0.8,      // Batang mengambil 80% ruang kategori
-                categoryPercentage: 0.9  // Jarak antar kategori lebih rapat
+                barPercentage: 0.7,      // Batang lebih tebal
+                categoryPercentage: 0.8  // Ruang antar bar lebih pas
             }]
         },
         options: {
@@ -319,18 +326,14 @@ function drawBarChart(labels, data) {
             },
             scales: {
                 x: {
-                    ticks: {
-                        callback: (v) => v.toLocaleString(),
-                        font: { size: 10 }
-                    }
+                    ticks: { callback: (v) => v.toLocaleString() }
                 },
                 y: {
                     ticks: {
                         autoSkip: false,
-                        font: { 
-                            size: 11, 
-                            weight: '600' // Biar nama kabupaten lebih tegas
-                        }
+                        font: { size: 10 },
+                        // Menambah sedikit padding kiri agar teks dua baris nggak mepet
+                        padding: 10 
                     }
                 }
             }
