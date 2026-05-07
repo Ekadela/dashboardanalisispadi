@@ -335,14 +335,17 @@ margin:8px 0;
 line-height:1.6;
 }
 
+/* Di file CSS kamu */
 #barChart {
-    height: 300px !important; 
+    /* Untuk 10 kabupaten dengan teks 2 baris, butuh minimal 650px - 700px */
+    height: 650px !important; 
     width: 100% !important;
 }
 
-/* Kalau kamu pakai pembungkus div, pastikan tingginya juga lega */
-.panel-top-10 { 
-    min-height: 400px; 
+/* Pastikan container luarnya (panel) tidak membatasi tinggi */
+.panel {
+    height: auto !important; 
+    min-height: 400px;
 }
 
 
