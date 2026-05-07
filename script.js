@@ -311,52 +311,55 @@ function drawBarChart(labels, data) {
             datasets: [{
                 label: 'Produksi Padi 2025',
                 data: data,
-                backgroundColor: '#2c7be5',      
-                hoverBackgroundColor: '#1a4b8c', // Efek menggelap pas dipencet
-                borderRadius: 4,
-                barPercentage: 0.7,      // Batang lebih berisi
-                categoryPercentage: 0.8  // Jarak antar batang pas
+                backgroundColor: '#10b981',      // Hijau lumbung padi (seperti infografis)
+                hoverBackgroundColor: '#059669', // Menggelap pas dipencet
+                borderRadius: 5,
+                barPercentage: 0.6,              // Batang ramping tapi tegas
+                categoryPercentage: 0.8
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            indexAxis: 'y', // Bar menyamping
-            
-            // --- KUNCI: BIAR DATA GAK NGACO & GAMPANG DIPENCET ---
+            indexAxis: 'y',
+            // --- BIAR GAMPANG DIPENCET ---
             interaction: {
-                mode: 'y',       // Fokus pada sumbu Y (lokasi kabupaten)
-                intersect: false // Area klik jadi luas (ga harus pas di tengah batang)
+                mode: 'index',
+                intersect: false
             },
-            
             plugins: {
                 legend: { display: false },
                 tooltip: {
                     enabled: true,
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                    padding: 10,
                     callbacks: {
-                        title: function(context) {
-                            // Menggabungkan array ["Kabupaten", "Nama"] jadi satu baris di popup
-                            let label = context[0].label;
-                            return Array.isArray(label) ? label.join(' ') : label;
-                        },
-                        label: (context) => ` Produksi: ${context.parsed.x.toLocaleString()} ton`
+                        title: (context) => context[0].label.join(' '), // Gabung array label
+                        label: (context) => ` ${context.parsed.x.toLocaleString()} ton`
                     }
                 }
             },
             scales: {
                 x: {
-                    beginAtZero: true,
+                    display: true,
+                    grid: { display: false }, // Hapus garis vertikal biar bersih
                     ticks: { callback: (v) => v.toLocaleString() }
                 },
-                y: { 
-                    ticks: { 
-                        autoSkip: false,
-                        font: { size: 10 },
-                        padding: 10,
-                        lineHeight: 1.2 // Memberi spasi antara kata "Kabupaten" dan "Nama"
-                    } 
+                y: {
+                    grid: { display: false }, // Hapus garis horizontal
+                    ticks: {
+                        crossAlign: 'near',
+                        align: 'start',      // RATA KIRI
+                        mirror: true,        // MASUK KE DALAM (Floating)
+                        padding: 10,         // Jarak dari batang
+                        color: '#334155',    // Warna teks gelap elegan
+                        font: {
+                            size: 13,
+                            weight: 'bold'
+                        },
+                        // Paksa tampil dua baris
+                        callback: function(value, index) {
+                            return this.getLabelForValue(index);
+                        }
+                    }
                 }
             }
         }
