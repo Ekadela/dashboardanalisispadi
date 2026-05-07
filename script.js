@@ -311,13 +311,11 @@ function drawBarChart(labels, data) {
             datasets: [{
                 label: 'Produksi Padi 2025',
                 data: data,
-                backgroundColor: '#2c7be5',      // Balik ke Biru
-                hoverBackgroundColor: '#1a4b8c', // Efek menggelap
+                backgroundColor: '#2c7be5',
+                hoverBackgroundColor: '#1a4b8c', 
                 borderRadius: 4,
-                
-                // --- PENGATUR JARAK BATANG ---
-                barPercentage: 0.9,      // Semakin mendekati 1, batang semakin gemuk (jarak antar batang makin kecil)
-                categoryPercentage: 0.9  // Semakin besar, ruang kosong antar kelompok makin dikit
+                barPercentage: 0.9,      
+                categoryPercentage: 0.9  
             }]
         },
         options: {
@@ -325,18 +323,24 @@ function drawBarChart(labels, data) {
             maintainAspectRatio: false,
             indexAxis: 'y',
             
-            // --- BIAR POPUP AKURAT & ENTENG ---
+            // --- KUNCI BIAR POPUP GAMPANG DIPENCET ---
             interaction: {
-                mode: 'y',          // WAJIB: Biar dia fokus ke baris kabupatennya
-                intersect: false    // WAJIB: Biar area klik luas (ga harus pas tengah batang)
+                mode: 'y',          // Fokus pada sumbu Y (lokasi kabupaten)
+                intersect: false    // Area klik luas, ga harus pas di tengah batang
             },
             
             plugins: {
                 legend: { display: false },
                 tooltip: {
                     enabled: true,
+                    backgroundColor: 'rgba(31, 78, 121, 0.9)',
+                    padding: 10,
                     callbacks: {
-                        title: (context) => context[0].label.join(' '), 
+                        // Agar judul tooltip tidak pecah saat dicheck
+                        title: (context) => {
+                            let label = context[0].label;
+                            return Array.isArray(label) ? label.join(' ') : label;
+                        },
                         label: (context) => ` Produksi: ${context.parsed.x.toLocaleString()} ton`
                     }
                 }
@@ -350,14 +354,15 @@ function drawBarChart(labels, data) {
                     ticks: {
                         autoSkip: false,
                         font: { size: 10 },
-                        padding: 5,        // Mengecilkan jarak tulisan ke garis grafik
-                        lineHeight: 1.1    // Mengecilkan jarak antar baris teks (Kabupaten vs Nama)
+                        padding: 10,
+                        lineHeight: 1.1 
                     }
                 }
             }
         }
     });
 }
+
 
 // NAMPILIN TREN PER KABUPATEN
 async function loadKabupatenTrend(){
