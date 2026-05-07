@@ -313,16 +313,32 @@ function drawBarChart(labels, data) {
                 data: data,
                 backgroundColor: '#2c7be5',
                 borderRadius: 4,
-                barPercentage: 0.7,      // Batang lebih tebal
-                categoryPercentage: 0.8  // Ruang antar bar lebih pas
+                barPercentage: 0.6,      // Kecilin dikit biar batang gak kegedean dibanding teks
+                categoryPercentage: 0.8 
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            indexAxis: 'y', 
+            indexAxis: 'y',
+            // --- FIX TOOLTIP TERTUKAR ---
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
             plugins: {
-                legend: { display: false }
+                legend: { display: false },
+                tooltip: {
+                    enabled: true,
+                    // Memastikan popup menampilkan nama kabupaten yang benar
+                    callbacks: {
+                        title: function(context) {
+                            // Karena label kita array ["Kabupaten", "Nama"], kita gabungkan lagi buat judul popup
+                            return context[0].label.join(' ');
+                        },
+                        label: (context) => ` Produksi: ${context.parsed.x.toLocaleString()} ton`
+                    }
+                }
             },
             scales: {
                 x: {
@@ -331,10 +347,9 @@ function drawBarChart(labels, data) {
                 y: {
                     ticks: {
                         autoSkip: false,
-                        font: { size: 14 },
-                        letterSpacing:"2px",
-                        // Menambah sedikit padding kiri agar teks dua baris nggak mepet
-                        padding: 10 
+                        font: { size: 10 },
+                        padding: 15, // TAMBAHKAN INI: Memberi jarak teks dari garis
+                        lineHeight: 1.5 // TAMBAHKAN INI: Memberi spasi antar baris ("Kabupaten" vs "Nama")
                     }
                 }
             }
