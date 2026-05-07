@@ -335,7 +335,6 @@ margin:8px 0;
 line-height:1.6;
 }
 
-/* Cari bagian ini di CSS kamu dan ubah angkanya */
 #barChart {
     /* Jangan 300px, kasih minimal 500px - 600px biar 10 kabupaten bisa napas */
     height: 550px !important; 
@@ -344,7 +343,7 @@ line-height:1.6;
 
 /* Kalau kamu pakai pembungkus div, pastikan tingginya juga lega */
 .panel-top-10 { 
-    min-height: 600px; 
+    min-height: 400px; 
 }
 
 
