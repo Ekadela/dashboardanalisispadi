@@ -338,7 +338,7 @@ line-height:1.6;
 /* ----- TOP 10 ----- */
 #barChart {
     /* Untuk 10 kabupaten, 450px adalah tinggi ideal agar tidak sesak */
-    height: 450px !important; 
+    height: 350px !important; 
     width: 100% !important;
     margin-top: 10px;
 }
