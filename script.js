@@ -311,42 +311,51 @@ function drawBarChart(labels, data) {
             datasets: [{
                 label: 'Produksi Padi 2025',
                 data: data,
-                backgroundColor: '#2c7be5',      // Warna asli (Biru)
-                
-                // --- INI BIAR MENGGELAP PAS DIPENCET/HOVER ---
-                hoverBackgroundColor: '#1a4b8c', // Warna biru lebih gelap
-                
+                backgroundColor: '#2c7be5',      
+                hoverBackgroundColor: '#1a4b8c', // Efek menggelap pas dipencet
                 borderRadius: 4,
-                barPercentage: 0.6,
-                categoryPercentage: 0.8 
+                barPercentage: 0.7,      // Batang lebih berisi
+                categoryPercentage: 0.8  // Jarak antar batang pas
             }]
         },
         options: {
-            // ... (options lainnya tetep sama kayak sebelumnya ya)
             responsive: true,
             maintainAspectRatio: false,
-            indexAxis: 'y',
+            indexAxis: 'y', // Bar menyamping
             
-            // Tambahin ini juga biar efek hovernya makin mantap
-            hover: {
-                mode: 'index',
-                intersect: true
+            // --- KUNCI: BIAR DATA GAK NGACO & GAMPANG DIPENCET ---
+            interaction: {
+                mode: 'y',       // Fokus pada sumbu Y (lokasi kabupaten)
+                intersect: false // Area klik jadi luas (ga harus pas di tengah batang)
             },
             
             plugins: {
                 legend: { display: false },
                 tooltip: {
                     enabled: true,
-                    // ... (callback tooltip yang tadi kita buat)
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    padding: 10,
+                    callbacks: {
+                        title: function(context) {
+                            // Menggabungkan array ["Kabupaten", "Nama"] jadi satu baris di popup
+                            let label = context[0].label;
+                            return Array.isArray(label) ? label.join(' ') : label;
+                        },
+                        label: (context) => ` Produksi: ${context.parsed.x.toLocaleString()} ton`
+                    }
                 }
             },
             scales: {
-                x: { ticks: { callback: (v) => v.toLocaleString() } },
+                x: {
+                    beginAtZero: true,
+                    ticks: { callback: (v) => v.toLocaleString() }
+                },
                 y: { 
                     ticks: { 
                         autoSkip: false,
                         font: { size: 10 },
-                        padding: 10
+                        padding: 10,
+                        lineHeight: 1.2 // Memberi spasi antara kata "Kabupaten" dan "Nama"
                     } 
                 }
             }
