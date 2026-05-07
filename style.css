@@ -336,20 +336,22 @@ line-height:1.6;
 }
 
 /* ----- TOP 10 ----- */
-/* Cari bagian #barChart dan ganti angkanya */
 #barChart {
-    height: 480px !important; /* Turunkan ke 480px agar lebih padat dan tidak terlalu tinggi */
+    /* Untuk 10 kabupaten, 600px adalah tinggi ideal agar tidak sesak */
+    height: 600px !important; 
     width: 100% !important;
+    margin-top: 10px;
 }
 
-/* Pastikan panel pembungkusnya mengikuti tinggi konten */
+/* Biar panelnya rapi seperti infografis */
 .panel {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    height: auto; /* Biar fleksibel */
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
+
 
 
 @media (max-width: 768px) {
