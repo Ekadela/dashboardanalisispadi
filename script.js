@@ -311,52 +311,48 @@ function drawBarChart(labels, data) {
             datasets: [{
                 label: 'Produksi Padi 2025',
                 data: data,
-                backgroundColor: '#2c7be5',
+                backgroundColor: '#2c7be5',      // Warna asli (Biru)
+                
+                // --- INI BIAR MENGGELAP PAS DIPENCET/HOVER ---
+                hoverBackgroundColor: '#1a4b8c', // Warna biru lebih gelap
+                
                 borderRadius: 4,
-                barPercentage: 0.6,      // Kecilin dikit biar batang gak kegedean dibanding teks
+                barPercentage: 0.6,
                 categoryPercentage: 0.8 
             }]
         },
         options: {
+            // ... (options lainnya tetep sama kayak sebelumnya ya)
             responsive: true,
             maintainAspectRatio: false,
             indexAxis: 'y',
-            // --- FIX TOOLTIP TERTUKAR ---
-            interaction: {
+            
+            // Tambahin ini juga biar efek hovernya makin mantap
+            hover: {
                 mode: 'index',
-                intersect: false
+                intersect: true
             },
+            
             plugins: {
                 legend: { display: false },
                 tooltip: {
                     enabled: true,
-                    // Memastikan popup menampilkan nama kabupaten yang benar
-                    callbacks: {
-                        title: function(context) {
-                            // Karena label kita array ["Kabupaten", "Nama"], kita gabungkan lagi buat judul popup
-                            return context[0].label.join(' ');
-                        },
-                        label: (context) => ` Produksi: ${context.parsed.x.toLocaleString()} ton`
-                    }
+                    // ... (callback tooltip yang tadi kita buat)
                 }
             },
             scales: {
-                x: {
-                    ticks: { callback: (v) => v.toLocaleString() }
-                },
-                y: {
-                    ticks: {
+                x: { ticks: { callback: (v) => v.toLocaleString() } },
+                y: { 
+                    ticks: { 
                         autoSkip: false,
                         font: { size: 10 },
-                        padding: 15, // TAMBAHKAN INI: Memberi jarak teks dari garis
-                        lineHeight: 1.5 // TAMBAHKAN INI: Memberi spasi antar baris ("Kabupaten" vs "Nama")
-                    }
+                        padding: 10
+                    } 
                 }
             }
         }
     });
 }
-
 
 // NAMPILIN TREN PER KABUPATEN
 async function loadKabupatenTrend(){
