@@ -335,17 +335,21 @@ margin:8px 0;
 line-height:1.6;
 }
 
+/* ----- TOP 10 ----- */
+/* Cari bagian #barChart dan ganti angkanya */
 #barChart {
-    /* Jangan 300px, kasih minimal 500px - 600px biar 10 kabupaten bisa napas */
-    height: 550px !important; 
+    height: 480px !important; /* Turunkan ke 480px agar lebih padat dan tidak terlalu tinggi */
     width: 100% !important;
 }
 
-/* Kalau kamu pakai pembungkus div, pastikan tingginya juga lega */
-.panel-top-10 { 
-    min-height: 400px; 
+/* Pastikan panel pembungkusnya mengikuti tinggi konten */
+.panel {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    height: auto; /* Biar fleksibel */
 }
-
 
 
 @media (max-width: 768px) {
