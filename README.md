@@ -23,7 +23,7 @@ This dashboard provides several interactive visualization features, including:
 
 ## Dashboard Preview
 
-![Dashboard Preview](assets/dashboard-preview.png)
+![Dashboard Preview](https://dashboardanalisispadi-kappa.vercel.app/)
 
 ---
 
@@ -66,28 +66,3 @@ The dataset used in this project contains rice production statistics from distri
 
 Data Source:
 - Badan Pusat Statistik (BPS) East Java Province
-
----
-
-## Project Structure
-
-```bash
-project-folder/
-│
-├── assets/
-│   ├── logo.png
-│   ├── padi.png
-│   └── dashboard-preview.png
-│
-├── data/
-│   ├── 2018.csv
-│   ├── 2019.csv
-│   └── ...
-│
-├── map/
-│   └── jatim.geojson
-│
-├── index.html
-├── style.css
-├── script.js
-└── README.md
