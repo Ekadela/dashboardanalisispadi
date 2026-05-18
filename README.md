@@ -21,12 +21,6 @@ This dashboard provides several interactive visualization features, including:
 
 ---
 
-## Dashboard Preview
-
-![Dashboard Preview](https://dashboardanalisispadi-kappa.vercel.app/)
-
----
-
 ## Features
 
 ### KPI Cards
